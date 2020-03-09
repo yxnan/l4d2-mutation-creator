@@ -5,9 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l4d2_mutation_creator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinWidth="800" MinHeight="450">
+        Title="求生之路2变异模式生成器" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
-        <TabControl HorizontalAlignment="Left" Height="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" Margin="0,0,0,-0.333">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
+            <TabItem Header="基本配置">
+                <Grid x:Name="gridFirstTab" Background="#FFE5E5E5" Width="604" Height="361" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-10,0">
+                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
+                    <Button Content="定位游戏目录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="230,16,0,0"/>
+                    <Label Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
+                    <Grid x:Name="gridPlayerNumber" HorizontalAlignment="Left" Height="86" Margin="454,69,0,0" VerticalAlignment="Top" Width="96">
+                        <Label Content="允许玩家数量" HorizontalAlignment="Center" VerticalAlignment="Top" Width="91"/>
+                        <RadioButton Content="1人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0"/>
+                        <RadioButton Content="4人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,51,0,0" IsChecked="True"/>
+                        <RadioButton Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0"/>
+                    </Grid>
+                    <TextBox x:Name="tbxDescription" HorizontalAlignment="Left" Height="221" Margin="10,87,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" Width="196"/>
+                    <Label Content="描述（在'附加组件'中显示的内容）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Width="196"/>
+                    <Grid x:Name="gridMiscOptions" HorizontalAlignment="Left" Height="239" Margin="215,69,0,0" VerticalAlignment="Top" Width="224">
+                        <Label Content="变异名称" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="81,0,85,0"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,32,19,0"/>
+                        <Label Content="ID（建图时使用）" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,60,62,0" Width="102" Height="28"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,90,0,0"/>
+                        <Label Content="作者SteamID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,119,0,0" Width="85"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" Margin="18,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+                        <Label Content="简介（在游戏主界面显示）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,177,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,208,0,0"/>
+                    </Grid>
+                    <Grid x:Name="gridBaseGame" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="96" Margin="454,177,0,0">
+                        <Label Content="基础模式" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <RadioButton Content="写实" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,48,27,0"/>
+                        <RadioButton Content="合作" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,28,27,0" IsChecked="True"/>
+                    </Grid>
+                    <Button Content="生成vpk并安装" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,261,0,0"/>
+                    <Button Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
