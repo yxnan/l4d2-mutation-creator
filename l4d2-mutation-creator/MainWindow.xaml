@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l4d2_mutation_creator"
         mc:Ignorable="d"
-        Title="求生之路2变异模式生成器" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
+        Title="求生之路2变异模式生成器（版本：Alpha v0.1 测试版）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">
                 <Grid x:Name="gridFirstTab" Background="#FFE5E5E5" Width="604" Height="361" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-10,0">
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
+                    <TextBox x:Name="tbxGameDir" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
                     <Button Content="定位游戏目录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="230,16,0,0"/>
                     <Label Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
                     <Grid x:Name="gridPlayerNumber" HorizontalAlignment="Left" Height="86" Margin="454,69,0,0" VerticalAlignment="Top" Width="96">
@@ -23,13 +23,13 @@
                     <Label Content="描述（在'附加组件'中显示的内容）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Width="196"/>
                     <Grid x:Name="gridMiscOptions" HorizontalAlignment="Left" Height="239" Margin="215,69,0,0" VerticalAlignment="Top" Width="224">
                         <Label Content="变异名称" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="81,0,85,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,32,19,0"/>
+                        <TextBox x:Name="tbxMutName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,32,19,0"/>
                         <Label Content="ID（建图时使用）" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,60,62,0" Width="102" Height="28"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,90,0,0"/>
+                        <TextBox x:Name="tbxMutID" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,90,0,0"/>
                         <Label Content="作者SteamID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,119,0,0" Width="85"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" Margin="18,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
+                        <TextBox x:Name="tbxAuthorID" HorizontalAlignment="Left" Height="23" Margin="18,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187"/>
                         <Label Content="简介（在游戏主界面显示）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,177,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,208,0,0"/>
+                        <TextBox x:Name="tbxSummary" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Margin="18,208,0,0"/>
                     </Grid>
                     <Grid x:Name="gridBaseGame" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="96" Margin="454,177,0,0">
                         <Label Content="基础模式" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -40,11 +40,93 @@
                     <Button Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="数据修改">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="574" Margin="10,10,0,0">
+                        <CheckBox x:Name="chkFirstAid" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="294,5,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkPainPill" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,26,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkAdrenaline" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,5,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkMolotov" Content="燃烧瓶" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,26,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkPipeBomb" Content="土制炸弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,5,0,0" IsChecked="True"/>
+                        <Label Content="物品刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <CheckBox x:Name="chkDefibUnit" Content="起搏器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="294,26,0,0" IsChecked="True"/>
+                        <Label Content="资源数量" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="389,10,0,0"/>
+                        <RadioButton Content="较多" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,2,0,0"/>
+                        <RadioButton Content="较少" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,38,0,0"/>
+                        <RadioButton Content="适中" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,20,0,0" IsChecked="True"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,63,0,0">
+                        <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,1,0,0"/>
+                        <CheckBox x:Name="chkCommon" Content="Common" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,249,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkTank" Content="Tank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,218,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkCharger" Content="Charger" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,188,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkSmoker" Content="Smoker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,156,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkJockey" Content="Jockey" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkHunter" Content="Hunter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,95,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkSpitter" Content="Spitter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0" IsChecked="True"/>
+                        <Label Content="刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="201,1,0,0"/>
+                        <TextBox x:Name="tbxBoomer" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,31,0,0"/>
+                        <TextBox x:Name="tbxSpitter" HorizontalAlignment="Left" Height="23" Text="100" VerticalAlignment="Top" Width="93" Margin="79,62,0,0"/>
+                        <TextBox x:Name="tbxHunter" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,92,0,0"/>
+                        <TextBox x:Name="tbxJockey" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0"/>
+                        <TextBox x:Name="tbxSmoker" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,153,0,0"/>
+                        <TextBox x:Name="tbxCharger" HorizontalAlignment="Left" Height="23" Text="600" VerticalAlignment="Top" Width="93" Margin="79,185,0,0"/>
+                        <TextBox x:Name="tbxTank" HorizontalAlignment="Left" Height="23" Text="4000" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
+                        <TextBox x:Name="tbxCommon" HorizontalAlignment="Left" Height="23" Text="1000" VerticalAlignment="Top" Width="93" Margin="79,245,0,0"/>
+                        <TextBox x:Name="tbxLimitBoomer" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,31,0,0"/>
+                        <TextBox x:Name="tbxLimitSpitter" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,62,0,0"/>
+                        <TextBox x:Name="tbxLimitHunter" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,92,0,0"/>
+                        <TextBox x:Name="tbxLimitJockey" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,122,0,0"/>
+                        <TextBox x:Name="tbxLimitSmoker" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,153,0,0"/>
+                        <TextBox x:Name="tbxLimitCharger" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,185,0,0"/>
+                        <TextBox x:Name="tbxLimitTank" HorizontalAlignment="Left" Height="23" Text="1" VerticalAlignment="Top" Width="93" Margin="183,215,0,0"/>
+                        <TextBox x:Name="tbxLimitCommon" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="93" Margin="183,245,0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="219" Margin="313,82,0,0">
+                        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="107,10,0,0">
+                            <ComboBoxItem Content="5秒"/>
+                            <ComboBoxItem Content="10秒" IsSelected="True"/>
+                            <ComboBoxItem Content="15秒"/>
+                            <ComboBoxItem Content="20秒"/>
+                            <ComboBoxItem Content="25秒"/>
+                        </ComboBox>
+                        <Label Content="感染者刷新间隔" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,8,0,0"/>
+                        <Label Content="生还者倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,70,0,0"/>
+                        <RadioButton Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,105,0,0"/>
+                        <RadioButton Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0"/>
+                        <RadioButton Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="219" Margin="313,204,0,0">
+                        <Label Content="队友伤害" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,34,0,0"/>
+                        <RadioButton Content="低（萌新模式）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,71,0,0"/>
+                        <RadioButton Content="中（一般黑枪）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,45,0,0" IsChecked="True"/>
+                        <RadioButton Content="高（搞事必备）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,19,0,0"/>
+                        <CheckBox Content="提升bot智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,106,0,0"/>
+                        <CheckBox Content="复活时恢复满血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,106,0,0"/>
+                    </Grid>
+                </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="帮助说明">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦"/><Run Text=" 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
+                    <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
+                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="HypeLink1" Click="HypeLink1_OnClick" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="HypeLink2" Click="HypeLink2_OnClick" ><Run Text="bil"/><Run Text="i清唱"/></Hyperlink></TextBlock>
+                        <Label Content="GitHub项目地址：" Margin="14,32,165,50"/>
+                        <Label Content="UP的b站账号：" Margin="31,65,170,15" RenderTransformOrigin="-0.204,-0.317"/>
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="0,17,0,0"/>
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
+                    <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
+                        <Label Content="接下去想加入的功能：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,-30,0"/>
+                        <CheckBox Content="事件机制（如'Tank死亡'-&gt;'刷新尸潮'）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
+                        <CheckBox Content="武器生成控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
+                        <CheckBox Content="检查更新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="✦ 欢迎参与本项目！UP的C# WPF开发是现学的，不足之处请多多指正！" VerticalAlignment="Top" Margin="299,243,0,0" Width="268"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="299,287,0,0" Height="36" Width="259"><Run Text="✦"/><Run Text=" 本程序完全自由开源，你可以任意传播、修改、发布本程序的源码和二进制文件，不必署名"/></TextBlock>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

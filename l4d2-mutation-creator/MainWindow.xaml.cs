@@ -24,5 +24,15 @@ namespace l4d2_mutation_creator
         {
             InitializeComponent();
         }
+        private void HypeLink1_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sakamitz/l4d2-mutation-creator");
+        }
+
+        private void HypeLink2_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://space.bilibili.com/374026342/");
+        }
     }
+
 }
