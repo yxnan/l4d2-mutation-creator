@@ -10,9 +10,9 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">
                 <Grid x:Name="gridFirstTab" Background="#FFE5E5E5" Width="604" Height="361" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-10,0">
-                    <TextBox x:Name="tbxGameDir" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
-                    <Button Content="定位游戏目录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="230,16,0,0"/>
-                    <Label Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
+                    <TextBox x:Name="tbxGameDir" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
+                    <Button x:Name="btnBrowse" Content="定位游戏目录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="230,16,0,0" Click="BtnBrowse_Click"/>
+                    <Label x:Name="lblHasFindGame" Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
                     <Grid x:Name="gridPlayerNumber" HorizontalAlignment="Left" Height="86" Margin="454,69,0,0" VerticalAlignment="Top" Width="96">
                         <Label Content="允许玩家数量" HorizontalAlignment="Center" VerticalAlignment="Top" Width="91"/>
                         <RadioButton Content="1人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0"/>
@@ -36,26 +36,14 @@
                         <RadioButton Content="写实" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,48,27,0"/>
                         <RadioButton Content="合作" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,28,27,0" IsChecked="True"/>
                     </Grid>
-                    <Button Content="生成vpk并安装" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,261,0,0"/>
-                    <Button Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0"/>
+                    <Button Content="生成vpk并安装" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,261,0,0" IsEnabled="False"/>
+                    <Button Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0" IsEnabled="False"/>
+                    <Label x:Name="lblDebug" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,46,0,0" Width="347"/>
                 </Grid>
             </TabItem>
             <TabItem Header="数据修改">
                 <Grid Background="#FFE5E5E5">
-                    <Grid HorizontalAlignment="Left" Height="53" VerticalAlignment="Top" Width="574" Margin="10,10,0,0">
-                        <CheckBox x:Name="chkFirstAid" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="294,5,0,0" IsChecked="True"/>
-                        <CheckBox x:Name="chkPainPill" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,26,0,0" IsChecked="True"/>
-                        <CheckBox x:Name="chkAdrenaline" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,5,0,0" IsChecked="True"/>
-                        <CheckBox x:Name="chkMolotov" Content="燃烧瓶" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,26,0,0" IsChecked="True"/>
-                        <CheckBox x:Name="chkPipeBomb" Content="土制炸弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,5,0,0" IsChecked="True"/>
-                        <Label Content="物品刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                        <CheckBox x:Name="chkDefibUnit" Content="起搏器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="294,26,0,0" IsChecked="True"/>
-                        <Label Content="资源数量" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="389,10,0,0"/>
-                        <RadioButton Content="较多" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,2,0,0"/>
-                        <RadioButton Content="较少" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,38,0,0"/>
-                        <RadioButton Content="适中" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,20,0,0" IsChecked="True"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,63,0,0">
+                    <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,60,0,0">
                         <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,1,0,0"/>
                         <CheckBox x:Name="chkCommon" Content="Common" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,249,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkTank" Content="Tank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,218,0,0" IsChecked="True"/>
@@ -72,8 +60,8 @@
                         <TextBox x:Name="tbxJockey" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0"/>
                         <TextBox x:Name="tbxSmoker" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,153,0,0"/>
                         <TextBox x:Name="tbxCharger" HorizontalAlignment="Left" Height="23" Text="600" VerticalAlignment="Top" Width="93" Margin="79,185,0,0"/>
-                        <TextBox x:Name="tbxTank" HorizontalAlignment="Left" Height="23" Text="4000" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
-                        <TextBox x:Name="tbxCommon" HorizontalAlignment="Left" Height="23" Text="1000" VerticalAlignment="Top" Width="93" Margin="79,245,0,0"/>
+                        <TextBox x:Name="tbxTank" HorizontalAlignment="Left" Height="23" Text="1.0" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
+                        <TextBox x:Name="tbxCommon" HorizontalAlignment="Left" Height="23" Text="不定" VerticalAlignment="Top" Width="93" Margin="79,245,0,0" IsEnabled="False"/>
                         <TextBox x:Name="tbxLimitBoomer" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,31,0,0"/>
                         <TextBox x:Name="tbxLimitSpitter" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,62,0,0"/>
                         <TextBox x:Name="tbxLimitHunter" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,92,0,0"/>
@@ -82,6 +70,7 @@
                         <TextBox x:Name="tbxLimitCharger" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,185,0,0"/>
                         <TextBox x:Name="tbxLimitTank" HorizontalAlignment="Left" Height="23" Text="1" VerticalAlignment="Top" Width="93" Margin="183,215,0,0"/>
                         <TextBox x:Name="tbxLimitCommon" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="93" Margin="183,245,0,0"/>
+                        <Label Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,211,0,0" Width="21"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="219" Margin="313,82,0,0">
                         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="107,10,0,0">
@@ -97,13 +86,71 @@
                         <RadioButton Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0"/>
                         <RadioButton Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True"/>
                     </Grid>
-                    <Grid HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="219" Margin="313,204,0,0">
+                    <Grid HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="219" Margin="313,213,0,0">
                         <Label Content="队友伤害" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,34,0,0"/>
                         <RadioButton Content="低（萌新模式）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,71,0,0"/>
                         <RadioButton Content="中（一般黑枪）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,45,0,0" IsChecked="True"/>
                         <RadioButton Content="高（搞事必备）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,19,0,0"/>
-                        <CheckBox Content="提升bot智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,106,0,0"/>
-                        <CheckBox Content="复活时恢复满血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,106,0,0"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="522" Margin="10,3,0,0">
+                        <Label Content="杂项修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
+                        <CheckBox Content="竞速模式（只能救援一人）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="199,33,0,0"/>
+                        <CheckBox Content="关闭中途复活点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="199,12,0,0"/>
+                        <CheckBox Content="初始为虚血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
+                        <CheckBox Content="必须爆头" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,12,0,0"/>
+                        <CheckBox Content="提升人机智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,12,0,0"/>
+                        <CheckBox Content="复活后满血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,33,0,0"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="武器资源">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" Height="316" VerticalAlignment="Top" Width="384" Margin="10,10,0,0">
+                        <Label Content="武器刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="143,-5,0,0" FontSize="16"/>
+                        <Label Content="霰弹枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,30,0,0"/>
+                        <CheckBox Content="电锯" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,198,0,0" IsChecked="True"/>
+                        <CheckBox Content="所有近战" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,178,0,0" IsChecked="True"/>
+                        <CheckBox Content="Pistol Magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,278,0,0" IsChecked="True"/>
+                        <CheckBox Content="Pistol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,258,0,0" IsChecked="True"/>
+                        <CheckBox Content="Sniper Scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,120,0,0"/>
+                        <CheckBox Content="Sniper AWP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,100,0,0"/>
+                        <CheckBox Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,80,0,0"/>
+                        <CheckBox Content="Grenade Launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,278,0,0" IsChecked="True"/>
+                        <CheckBox Content="Rifle M60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,258,0,0" IsChecked="True"/>
+                        <CheckBox Content="SMG Silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,198,0,0" IsChecked="True"/>
+                        <CheckBox Content="SMG" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,178,0,0" IsChecked="True"/>
+                        <CheckBox Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,120,0,0" IsEnabled="False"/>
+                        <CheckBox Content="Rifle Desert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,100,0,0" IsChecked="True"/>
+                        <CheckBox Content="Rifle Ak47" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,80,0,0" IsChecked="True"/>
+                        <CheckBox Content="Rifle M16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,60,0,0" IsChecked="True"/>
+                        <CheckBox Content="Shotgun SPAS" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,120,0,0" IsChecked="True"/>
+                        <CheckBox Content="Shotgun Chrome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0" IsChecked="True"/>
+                        <CheckBox Content="Hunting Rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,198,0,0" IsChecked="True"/>
+                        <CheckBox Content="Sniper Military" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,178,0,0" IsChecked="True"/>
+                        <CheckBox Content="Pump Shotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0" IsChecked="True"/>
+                        <CheckBox Content="Auto Shotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0" IsChecked="True"/>
+                        <Label Content="狙击枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,148,0,0"/>
+                        <Label Content="自动步枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,30,0,0"/>
+                        <Label Content="冲锋枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,148,0,0"/>
+                        <Label Content="重武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,228,0,0"/>
+                        <Label Content="隐藏武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,30,0,0"/>
+                        <CheckBox Content="SMG MP5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,60,0,0"/>
+                        <Label Content="手枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,228,0,0"/>
+                        <Label Content="近战武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,148,0,0"/>
+                        <Label Content="武器升级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,228,0,0"/>
+                        <CheckBox x:Name="chkIncendiary1" Content="燃烧弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,257,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkExplosive1" Content="高爆弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,278,0,0" IsChecked="True"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="174" Margin="399,10,0,0">
+                        <CheckBox x:Name="chkFirstAid1" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,172,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkPainPill1" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,137,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkAdrenaline1" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,107,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkMolotov1" Content="燃烧瓶" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,73,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkPipeBomb1" Content="土制炸弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,43,0,0" IsChecked="True"/>
+                        <Label Content="其他资源" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,0,0,0" FontSize="16"/>
+                        <CheckBox x:Name="chkDefibUnit1" Content="起搏器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,208,0,0" IsChecked="True"/>
+                        <CheckBox Content="激光瞄准器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,278,0,0" IsChecked="True"/>
+                        <CheckBox Content="弹药补充点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,243,0,0" IsChecked="True"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -120,8 +167,8 @@
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
                         <Label Content="接下去想加入的功能：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,-30,0"/>
-                        <CheckBox Content="事件机制（如'Tank死亡'-&gt;'刷新尸潮'）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
-                        <CheckBox Content="武器生成控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
+                        <CheckBox Content="更多小细节……" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
+                        <CheckBox Content="事件绑定（如'Tank死亡'-&gt;'刷新尸潮'）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
                         <CheckBox Content="检查更新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="✦ 欢迎参与本项目！UP的C# WPF开发是现学的，不足之处请多多指正！" VerticalAlignment="Top" Margin="299,243,0,0" Width="268"/>
