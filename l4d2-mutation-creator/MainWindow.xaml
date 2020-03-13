@@ -26,18 +26,18 @@
                         <TextBox x:Name="tbxMutName" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="187" Margin="18,32,19,0"/>
                         <Label Content="ID（建图时使用）" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,60,62,0" Width="102" Height="28"/>
                         <TextBox x:Name="tbxMutID" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="AlphabetOnly" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="187" Margin="18,90,0,0"/>
-                        <Label Content="作者SteamID" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,119,0,0" Width="85"/>
-                        <TextBox x:Name="tbxAuthorID" HorizontalAlignment="Left" Height="23" Margin="18,148,0,0" VerticalAlignment="Top" Width="187"/>
+                        <Label Content="作者名" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,118,0,0" Width="54"/>
+                        <TextBox x:Name="tbxAuthor" HorizontalAlignment="Left" Height="23" Margin="18,148,0,0" VerticalAlignment="Top" Width="187"/>
                         <Label Content="简介（在游戏主界面显示）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,177,0,0"/>
                         <TextBox x:Name="tbxSummary" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="187" Margin="18,208,0,0"/>
                     </Grid>
                     <Grid x:Name="gridBaseGame" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="96" Margin="454,177,0,0">
                         <Label Content="基础模式" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="chkRealism" Content="写实" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,48,27,0"/>
-                        <RadioButton x:Name="chkCoop" Content="合作" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,28,27,0" IsChecked="True"/>
+                        <RadioButton x:Name="chkRealism" Content="写实" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,48,27,0" Checked="ChkRealism_Checked"/>
+                        <RadioButton x:Name="chkCoop" Content="合作" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="27,28,27,0" IsChecked="True" Checked="ChkCoop_Checked"/>
                     </Grid>
                     <Button x:Name="btnGenVPK" Content="生成vpk并安装" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,261,0,0" IsEnabled="False" Click="BtnGenVPK_Click"/>
-                    <Button x:Name="btnExport" Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0" IsEnabled="False"/>
+                    <Button x:Name="btnExport" Content="导出到桌面" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Margin="454,294,0,0" IsEnabled="False" Click="BtnExport_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="数据修改">
@@ -51,7 +51,7 @@
                         <TextBox x:Name="tbxJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0"/>
                         <TextBox x:Name="tbxSmoker" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,153,0,0"/>
                         <TextBox x:Name="tbxCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="600" VerticalAlignment="Top" Width="93" Margin="79,185,0,0"/>
-                        <TextBox x:Name="tbxTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="1.0" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
+                        <TextBox x:Name="tbxTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="4000" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
                         <TextBox x:Name="tbxCommon" InputMethod.IsInputMethodEnabled="False" HorizontalAlignment="Left" Height="23" Text="不定" VerticalAlignment="Top" Width="93" Margin="79,245,0,0" IsEnabled="False"/>
                         <TextBox x:Name="tbxLimitBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,31,0,0"/>
                         <TextBox x:Name="tbxLimitSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,62,0,0"/>
@@ -61,7 +61,6 @@
                         <TextBox x:Name="tbxLimitCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,185,0,0"/>
                         <TextBox x:Name="tbxLimitTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="1" VerticalAlignment="Top" Width="93" Margin="183,215,0,0"/>
                         <TextBox x:Name="tbxLimitCommon" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="93" Margin="183,245,0,0"/>
-                        <Label Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,211,0,0" Width="21"/>
                         <CheckBox x:Name="chkCommon" Content="Common" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,249,0,0" IsChecked="True" Checked="ChkCommon_Clicked" Unchecked="ChkCommon_Clicked"/>
                         <CheckBox x:Name="chkTank" Content="Tank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,218,0,0" IsChecked="True" Checked="ChkTank_Clicked" Unchecked="ChkTank_Clicked"/>
                         <CheckBox x:Name="chkCharger" Content="Charger" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,188,0,0" IsChecked="True" Checked="ChkCharger_Clicked" Unchecked="ChkCharger_Clicked"/>
@@ -96,7 +95,7 @@
                         <Label Content="杂项修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0"/>
                         <CheckBox x:Name="chkFirstManOut" Content="竞速模式（只能救援一人）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="199,33,0,0"/>
                         <CheckBox x:Name="chkNoInGameRespawn" Content="关闭中途复活点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="199,12,0,0"/>
-                        <CheckBox x:Name="chkTempHealth" Content="初始为虚血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,12,0,0"/>
+                        <CheckBox x:Name="chkTempHealth" Content="只有虚血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,12,0,0"/>
                         <CheckBox x:Name="chkHeadShot" Content="必须爆头" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,12,0,0"/>
                         <CheckBox x:Name="chkImproveAI" Content="提升人机智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
                         <CheckBox x:Name="chkPillConvertion" Content="急救包替换为止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,33,0,0"/>

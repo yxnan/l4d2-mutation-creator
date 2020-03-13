@@ -23,10 +23,10 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class MainWindow : Window
     {
-        // 二义性的值不必单独存放
-        // string BaseGame = "coop"
+        string BaseGame = "coop";
         int PlayerNumber = 4;
         int IncapMode = 1; // 1 - 普通倒地，2 - 转为黑白，3 - 直接死亡
+        Helpers helper = new Helpers();
 
         public MainWindow()
         {
@@ -44,8 +44,9 @@ namespace l4d2_mutation_creator
                     }
                 }
             }
-            catch (Exception e)
-            {}
+            catch (Exception) {
+                throw;
+            }
         }
         private void HasFoundGame(string GameDir, bool rewrite)
         {
@@ -70,11 +71,11 @@ namespace l4d2_mutation_creator
             e.Handled = re.IsMatch(e.Text);
         }
         // @TODO
-        private void RealOnly(object sender, TextCompositionEventArgs e)
-        {
-            Regex re = new Regex(@"[^0-9]+[^\.]?[^0-9]*");
-            e.Handled = re.IsMatch(e.Text);
-        }
+        //private void RealOnly(object sender, TextCompositionEventArgs e)
+        //{
+        //    Regex re = new Regex(@"[^0-9]+[^\.]?[^0-9]*");
+        //    e.Handled = re.IsMatch(e.Text);
+        //}
         private void AlphabetOnly(object sender, TextCompositionEventArgs e)
         {
             Regex re = new Regex(@"[^a-z]+");
@@ -274,11 +275,99 @@ namespace l4d2_mutation_creator
                 tbxLimitCommon.Text = "30";
             }
         }
+        private void GenVPK(string targetDir)
+        {
+            //// addoninfo.txt
+            //// @TODO : vpk description
+            //helper.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
+            //// modes\<mutname.txt>
+            //helper.DelectOldFiles("template/modes");
+            //helper.WriteGameMode(tbxMutName.Text, tbxMutID.Text, BaseGame, PlayerNumber,
+            //    tbxSummary.Text, tbxAuthor.Text);
+            MessageBox.Show("VPK gen on " + targetDir);
+        }
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
+            GenVPK("");
+        }
+        private void ChkCoop_Checked(object sender, RoutedEventArgs e)
+        {
+            BaseGame = "coop";
+        }
 
+        private void ChkRealism_Checked(object sender, RoutedEventArgs e)
+        {
+            BaseGame = "realism";
+        }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            GenVPK(dir);
         }
     }
 
+    public class Helpers
+    {
+        public void DelectOldFiles(string rootPath)
+        {
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(rootPath);
+                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
+                foreach (FileSystemInfo f in fileinfo)
+                {
+                    if (f is DirectoryInfo)
+                    {
+                        //DirectoryInfo subdir = new DirectoryInfo(f.FullName);
+                        //subdir.Delete(true);
+                    }
+                    else
+                    {
+                        File.Delete(f.FullName);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void WriteGameMode(string GameName, string GameID, string BaseGame, 
+            int PlayerNumber, string GameSummary, string GameAuthor)
+        {
+            using (StreamWriter fileMode = new StreamWriter("template/modes/" + GameID + ".txt"))
+            {
+                string strMode = "\"{0}\" {{\r\n" +
+                    "\"base\" \"{1}\"\r\n" +
+                    "\"maxplayers\"    \"{2}\"\r\n" +
+                    "\"DisplayTitle\"  \"{3}\"\r\n" +
+                    "\"Description\"   \"{4}\"\r\n" +
+                    "\"Image\"     \"maps/any\"\r\n" +
+                    "\"Author\"    \"{5}\"}}";
+
+                strMode = string.Format(strMode, GameID, BaseGame, PlayerNumber,
+                    GameName, GameSummary, GameAuthor);
+                fileMode.Write(strMode);
+            }
+        }
+
+        public void WriteGameInfo(string GameName, string GameAuthor, string GameSummary)
+        {
+            using (StreamWriter fileInfo = new StreamWriter("template/addoninfo.txt"))
+            {
+                string strInfo = "\"AddonInfo\" {{\r\n" +
+                    "addonSteamAppID     550\r\n" +
+                    "addontitle          \"{0}\"\r\n" +
+                    "addonContent_Script 1\r\n" +
+                    "addonversion        1.0\r\n" +
+                    "addonauthor         \"{1}\"\r\n" +
+                    "addonDescription    \"{2}\"}}";
+
+                strInfo = string.Format(strInfo, GameName, GameAuthor, GameSummary);
+                fileInfo.Write(strInfo);
+            }
+        }
+    }
 }
