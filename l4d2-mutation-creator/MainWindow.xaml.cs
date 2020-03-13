@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Path = System.IO.Path;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -282,10 +283,11 @@ namespace l4d2_mutation_creator
             //helper.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
             //// modes\<mutname.txt>
-            //helper.DelectOldFiles("template/modes");
+            //helper.DelectOldModes("template/modes");
             //helper.WriteGameMode(tbxMutName.Text, tbxMutID.Text, BaseGame, PlayerNumber,
             //    tbxSummary.Text, tbxAuthor.Text);
-            MessageBox.Show("VPK gen on " + targetDir);
+            //MessageBox.Show("VPK gen on " + targetDir);
+            MessageBox.Show(helper.VerifyIntegrity().ToString());
         }
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
@@ -310,8 +312,53 @@ namespace l4d2_mutation_creator
 
     public class Helpers
     {
-        public void DelectOldFiles(string rootPath)
+        public bool VerifyIntegrity()
         {
+            string[] LibFiles =
+            {
+                "EasyLogic.nut",
+                "Entity.nut",
+                "FileIO.nut",
+                "HUD.nut",
+                "Player.nut",
+                "RandomItemSpawner.nut",
+                "ResponseRules.nut",
+                "Timer.nut",
+                "Utils.nut"
+            };
+
+            string LibDir = "template/scripts/vscripts/VSLib";
+            if (false == Directory.Exists(LibDir)
+             || false == File.Exists(LibDir + ".nut")) {
+                return false;
+            }
+
+            DirectoryInfo libpath = new DirectoryInfo(LibDir);
+            FileSystemInfo[] fileinfo = libpath.GetFileSystemInfos();
+
+            foreach (FileSystemInfo f in fileinfo)
+            {
+                if (f is DirectoryInfo)
+                {
+                    // don't care this
+                }
+                else
+                {
+                    if (false == LibFiles.Contains(Path.GetFileName(f.ToString())))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
+        public void DelectOldModes(string rootPath)
+        {
+            if (false == Directory.Exists(rootPath))
+            {
+                return;
+            }
             try
             {
                 DirectoryInfo dir = new DirectoryInfo(rootPath);
@@ -334,10 +381,15 @@ namespace l4d2_mutation_creator
                 throw;
             }
         }
-        public void WriteGameMode(string GameName, string GameID, string BaseGame, 
+        public void WriteGameMode(string GameName, string GameID, string BaseGame,
             int PlayerNumber, string GameSummary, string GameAuthor)
         {
-            using (StreamWriter fileMode = new StreamWriter("template/modes/" + GameID + ".txt"))
+            string ModeDir = "template/modes/";
+            if (false == Directory.Exists(ModeDir)) {
+                Directory.CreateDirectory(ModeDir);
+            }
+
+            using (StreamWriter fileMode = new StreamWriter(ModeDir + GameID + ".txt"))
             {
                 string strMode = "\"{0}\" {{\r\n" +
                     "\"base\" \"{1}\"\r\n" +
@@ -348,7 +400,7 @@ namespace l4d2_mutation_creator
                     "\"Author\"    \"{5}\"}}";
 
                 strMode = string.Format(strMode, GameID, BaseGame, PlayerNumber,
-                    GameName, GameSummary, GameAuthor);
+                    GameName.Trim(), GameSummary.Trim(), GameAuthor.Trim());
                 fileMode.Write(strMode);
             }
         }
@@ -365,7 +417,8 @@ namespace l4d2_mutation_creator
                     "addonauthor         \"{1}\"\r\n" +
                     "addonDescription    \"{2}\"}}";
 
-                strInfo = string.Format(strInfo, GameName, GameAuthor, GameSummary);
+                strInfo = string.Format(strInfo, GameName.Trim(),
+                    GameAuthor.Trim(), GameSummary.Trim());
                 fileInfo.Write(strInfo);
             }
         }
