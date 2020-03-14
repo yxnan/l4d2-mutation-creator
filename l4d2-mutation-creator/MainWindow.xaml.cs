@@ -1,19 +1,10 @@
 ﻿using System;
 using System.IO;
-using Path = System.IO.Path;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WinForm = System.Windows.Forms;
 using System.Text.RegularExpressions;
 
@@ -31,6 +22,7 @@ namespace l4d2_mutation_creator
 
         public void HasFoundGame(string GameDir, bool rewrite)
         {
+            GameOption.RootPath = GameDir;
             tbxGameDir.Text = GameDir;
             tbxGameDir.IsEnabled = false;
             lblHasFindGame.Content = "已找到游戏";
@@ -95,10 +87,10 @@ namespace l4d2_mutation_creator
 
         private void GenVPK(string targetDir)
         {
-            // ID 不能为 VSLib
-            if ("vslib" == tbxMutID.Text)
+            // ID 不能为空或 VSLib
+            if ("" == tbxMutID.Text || "vslib" == tbxMutID.Text)
             {
-                MessageBox.Show("变异ID名不能为vslib，请重新修改", "提示",
+                MessageBox.Show("变异ID名不能为空或vslib，请重新修改", "提示",
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
@@ -115,6 +107,9 @@ namespace l4d2_mutation_creator
             // vscripts/<mutID>.nut
             App.WriteGameScript(tbxMutID.Text, GenDirector(), GenHookFuncs());
             MessageBox.Show("VPK gen on " + targetDir);
+
+            string cmd = "\"" + GameOption.RootPath + "\\bin\\vpk.exe\" " + "template";
+            System.Diagnostics.Process.Start(cmd);
         }
 
         private string GenDirector()
@@ -195,10 +190,13 @@ namespace l4d2_mutation_creator
             };
             foreach (TextBox tbx in tbxHealth)
             {
-                HookFuncs += string.Format("function Notifications::OnSpa"+
-                    "wn::Reset{0}Health(player, params){{\r\n" +
-                    "if(player.GetPlayerType()==Z_{1})player.SetHealth({2});}}\r\n",
-                    tbx.Tag.ToString(), tbx.Tag.ToString().ToUpper(), tbx.Text);
+                if (true == tbx.IsEnabled)
+                {
+                    HookFuncs += string.Format("function Notifications::OnSpa" +
+                        "wn::Reset{0}Health(player, params){{\r\n" +
+                        "if(player.GetPlayerType()==Z_{1})player.SetHealth({2});}}\r\n",
+                        tbx.Tag.ToString(), tbx.Tag.ToString().ToUpper(), tbx.Text);
+                }
             }
 
             // Update
@@ -235,7 +233,10 @@ namespace l4d2_mutation_creator
             if (this.IsLoaded)
             {
                 TextBox tbx = (TextBox)sender;
-                GameOption.SI[tbx.Tag.ToString()].SetHealth(Convert.ToInt32(tbx.Text));
+                if (false == string.IsNullOrWhiteSpace(tbx.Text))
+                {
+                    GameOption.SI[tbx.Tag.ToString()].SetHealth(Convert.ToInt32(tbx.Text));
+                }
             }
         }
 
@@ -244,7 +245,10 @@ namespace l4d2_mutation_creator
             if (this.IsLoaded)
             {
                 TextBox tbx = (TextBox)sender;
-                GameOption.SI[tbx.Tag.ToString()].SetLimit(Convert.ToInt32(tbx.Text));
+                if (false == string.IsNullOrWhiteSpace(tbx.Text))
+                {
+                    GameOption.SI[tbx.Tag.ToString()].SetLimit(Convert.ToInt32(tbx.Text));
+                }
             }
         }
 

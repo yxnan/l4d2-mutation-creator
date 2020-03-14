@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace l4d2_mutation_creator
@@ -39,7 +36,6 @@ namespace l4d2_mutation_creator
                     string exeRootPath = sr.ReadLine();
                     if (!File.Exists(exeRootPath + "/left4dead2.exe"))
                     {
-
                         wnd.HasFoundGame(exeRootPath, false);
                     }
                 }
@@ -182,6 +178,8 @@ namespace l4d2_mutation_creator
     }
     public class GameOption
     {
+        // 游戏路径
+        public static string RootPath = "";
         // 游戏选项
         public static string BaseGame = "coop";
         public static int PlayerNumber = 4;
