@@ -90,7 +90,7 @@ namespace l4d2_mutation_creator
             return true;
 
         }
-        public void DelectOldModes(string rootPath)
+        public static void DelectOldModes(string rootPath)
         {
             if (false == Directory.Exists(rootPath))
             {
@@ -118,8 +118,8 @@ namespace l4d2_mutation_creator
 
             }
         }
-        public void WriteGameMode(string GameName, string GameID, string BaseGame,
-            int PlayerNumber, string GameSummary, string GameAuthor)
+        public static void WriteGameMode(string GameName, string GameID,
+            string GameSummary, string GameAuthor)
         {
             string ModeDir = "template/modes/";
             if (false == Directory.Exists(ModeDir))
@@ -137,13 +137,14 @@ namespace l4d2_mutation_creator
                     "\"Image\"     \"maps/any\"\r\n" +
                     "\"Author\"    \"{5}\"}}";
 
-                strMode = string.Format(strMode, GameID, BaseGame, PlayerNumber,
-                    GameName.Trim(), GameSummary.Trim(), GameAuthor.Trim());
+                strMode = string.Format(strMode, GameID, GameOption.BaseGame,
+                    GameOption.PlayerNumber, GameName.Trim(),
+                    GameSummary.Trim(), GameAuthor.Trim());
                 fileMode.Write(strMode);
             }
         }
 
-        public void WriteGameInfo(string GameName, string GameAuthor, string GameSummary)
+        public static void WriteGameInfo(string GameName, string GameAuthor, string GameSummary)
         {
             using (StreamWriter fileInfo = new StreamWriter("template/addoninfo.txt"))
             {
@@ -166,33 +167,41 @@ namespace l4d2_mutation_creator
     {
         // 游戏选项
         public static string BaseGame = "coop";
-        public static int    PlayerNumber = 4;
-        public static int    IncapMode = 1; // 1 - 普通倒地，2 - 转为黑白，3 - 直接死亡
+        public static int PlayerNumber = 4;
+        public static int IncapMode = 1; // 1 - 普通倒地，2 - 转为黑白，3 - 直接死亡
 
-        // 特感字典
+        // 感染者字典
         public static Dictionary<string, Zombie> SI = new Dictionary<string, Zombie>();
+        public static Dictionary<string, ProfZombie> DefaultSI;
 
         public static void InitSI()
         {
-            // 初始化特感
-            SI.Add("Boomer",  new Zombie(50,  3));
+            // 初始化感染者
+            SI.Add("Boomer", new Zombie(50, 3));
             SI.Add("Spitter", new Zombie(100, 3));
-            SI.Add("Hunter",  new Zombie(250, 2));
-            SI.Add("Jockey",  new Zombie(325, 2));
-            SI.Add("Smoker",  new Zombie(250, 2));
+            SI.Add("Hunter", new Zombie(250, 2));
+            SI.Add("Jockey", new Zombie(325, 2));
+            SI.Add("Smoker", new Zombie(250, 2));
             SI.Add("Charger", new Zombie(600, 2));
-            SI.Add("Tank",    new Zombie(4000, 1));
+            SI.Add("Tank", new Zombie(4000, 1));
+            SI.Add("Common", new Zombie(0, 20));
+
+            DefaultSI = new Dictionary<string, ProfZombie>();
+            foreach (KeyValuePair<string, Zombie> kv in SI)
+            {
+                DefaultSI.Add(kv.Key, kv.Value);
+            }
         }
     }
-    public class Zombie
+
+    public class BaseZombie
     {
-        private int Health;
-        private int Limit;
-        public Zombie(int zombieHealth, int zombieLimit)
+        protected int Health;
+        protected int Limit;
+        protected BaseZombie(int zombieHealth, int zombieLimit)
         {
             this.Health = zombieHealth;
             this.Limit  = zombieLimit;
-            MessageBox.Show("registered");
         }
         public int GetHealth()
         {
@@ -202,15 +211,30 @@ namespace l4d2_mutation_creator
         {
             return this.Limit;
         }
+    }
+
+
+    public class Zombie : BaseZombie
+    {
+        public Zombie(int a, int b) : base(a, b) { }
+
         public void SetHealth(int newHealth)
         {
             this.Health = newHealth;
-            MessageBox.Show(newHealth.ToString());
         }
         public void SetLimit(int newLimit)
         {
             this.Limit = newLimit;
-            MessageBox.Show(newLimit.ToString());
         }
+
+        public static implicit operator ProfZombie(Zombie z)
+        {
+            return new ProfZombie(z.GetHealth(), z.GetLimit());
+        }
+    }
+
+    public class ProfZombie : BaseZombie
+    {
+        public ProfZombie(int a, int b) : base(a, b) { }
     }
 }

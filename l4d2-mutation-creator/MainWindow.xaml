@@ -15,9 +15,9 @@
                     <Label x:Name="lblHasFindGame" Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
                     <Grid x:Name="gridPlayerNumber" HorizontalAlignment="Left" Height="86" Margin="454,69,0,0" VerticalAlignment="Top" Width="96">
                         <Label Content="允许玩家数量" HorizontalAlignment="Center" VerticalAlignment="Top" Width="91"/>
-                        <RadioButton Content="1人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" Checked="RadioButton_Checked"/>
-                        <RadioButton Content="4人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,51,0,0" IsChecked="True" Checked="RadioButton_Checked_1"/>
-                        <RadioButton Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0" Checked="RadioButton_Checked_2"/>
+                        <RadioButton Content="1人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" Checked="RdbPlayerNumber_Checked" Tag="1"/>
+                        <RadioButton Content="4人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,51,0,0" IsChecked="True" Checked="RdbPlayerNumber_Checked" Tag="4"/>
+                        <RadioButton Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0" Checked="RdbPlayerNumber_Checked" Tag="8"/>
                     </Grid>
                     <TextBox x:Name="tbxDescription" HorizontalAlignment="Left" Height="221" Margin="10,87,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" Width="196"/>
                     <Label Content="描述（在'附加组件'中显示的内容）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Width="196"/>
@@ -45,30 +45,30 @@
                     <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,60,0,0">
                         <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,1,0,0"/>
                         <Label Content="刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="201,1,0,0"/>
-                        <TextBox x:Name="tbxBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,31,0,0" TextChanged="TbxBoomer_TextChanged"/>
-                        <TextBox x:Name="tbxSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="100" VerticalAlignment="Top" Width="93" Margin="79,62,0,0"/>
-                        <TextBox x:Name="tbxHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,92,0,0"/>
-                        <TextBox x:Name="tbxJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0"/>
-                        <TextBox x:Name="tbxSmoker" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,153,0,0"/>
-                        <TextBox x:Name="tbxCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="600" VerticalAlignment="Top" Width="93" Margin="79,185,0,0"/>
-                        <TextBox x:Name="tbxTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="4000" VerticalAlignment="Top" Width="93" Margin="79,215,0,0"/>
+                        <TextBox x:Name="tbxBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,31,0,0" TextChanged="TbxHealth_TextChanged" Tag="Boomer" IsEnabled="{Binding IsChecked, ElementName=chkBoomer}"/>
+                        <TextBox x:Name="tbxSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="100" VerticalAlignment="Top" Width="93" Margin="79,62,0,0" TextChanged="TbxHealth_TextChanged" Tag="Spitter" IsEnabled="{Binding IsChecked, ElementName=chkSpitter}"/>
+                        <TextBox x:Name="tbxHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,92,0,0" TextChanged="TbxHealth_TextChanged" Tag="Hunter" IsEnabled="{Binding IsChecked, ElementName=chkHunter}"/>
+                        <TextBox x:Name="tbxJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0" TextChanged="TbxHealth_TextChanged" Tag="Jockey" IsEnabled="{Binding IsChecked, ElementName=chkJockey}"/>
+                        <TextBox x:Name="tbxSmoker" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,153,0,0" TextChanged="TbxHealth_TextChanged" Tag="Smoker" IsEnabled="{Binding IsChecked, ElementName=chkSmoker}"/>
+                        <TextBox x:Name="tbxCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="600" VerticalAlignment="Top" Width="93" Margin="79,185,0,0" TextChanged="TbxHealth_TextChanged" Tag="Charger" IsEnabled="{Binding IsChecked, ElementName=chkCharger}"/>
+                        <TextBox x:Name="tbxTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="4000" VerticalAlignment="Top" Width="93" Margin="79,215,0,0" TextChanged="TbxHealth_TextChanged" Tag="Tank" IsEnabled="{Binding IsChecked, ElementName=chkTank}"/>
                         <TextBox x:Name="tbxCommon" InputMethod.IsInputMethodEnabled="False" HorizontalAlignment="Left" Height="23" Text="不定" VerticalAlignment="Top" Width="93" Margin="79,245,0,0" IsEnabled="False"/>
-                        <TextBox x:Name="tbxLimitBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,31,0,0"/>
-                        <TextBox x:Name="tbxLimitSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,62,0,0"/>
-                        <TextBox x:Name="tbxLimitHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,92,0,0"/>
-                        <TextBox x:Name="tbxLimitJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,122,0,0"/>
-                        <TextBox x:Name="tbxLimitSmoker" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,153,0,0"/>
-                        <TextBox x:Name="tbxLimitCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,185,0,0"/>
-                        <TextBox x:Name="tbxLimitTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="1" VerticalAlignment="Top" Width="93" Margin="183,215,0,0"/>
-                        <TextBox x:Name="tbxLimitCommon" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="93" Margin="183,245,0,0"/>
-                        <CheckBox x:Name="chkCommon" Content="Common" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,249,0,0" IsChecked="True" Checked="ChkCommon_Clicked" Unchecked="ChkCommon_Clicked"/>
-                        <CheckBox x:Name="chkTank" Content="Tank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,218,0,0" IsChecked="True" Checked="ChkTank_Clicked" Unchecked="ChkTank_Clicked"/>
-                        <CheckBox x:Name="chkCharger" Content="Charger" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,188,0,0" IsChecked="True" Checked="ChkCharger_Clicked" Unchecked="ChkCharger_Clicked"/>
-                        <CheckBox x:Name="chkSmoker" Content="Smoker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,156,0,0" IsChecked="True" Checked="ChkSmoker_Clicked" Unchecked="ChkSmoker_Clicked"/>
-                        <CheckBox x:Name="chkJockey" Content="Jockey" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0" IsChecked="True" Checked="ChkJockey_Clicked" Unchecked="ChkJockey_Clicked"/>
-                        <CheckBox x:Name="chkHunter" Content="Hunter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,95,0,0" IsChecked="True" Checked="ChkHunter_Clicked" Unchecked="ChkHunter_Clicked"/>
-                        <CheckBox x:Name="chkSpitter" Content="Spitter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsChecked="True" Checked="ChkSpitter_Clicked" Unchecked="ChkSpitter_Clicked"/>
-                        <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0" IsChecked="True" Checked="ChkBoomer_Clicked" Unchecked="ChkBoomer_Clicked"/>
+                        <TextBox x:Name="tbxLimitBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,31,0,0" Tag="Boomer" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkBoomer}"/>
+                        <TextBox x:Name="tbxLimitSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="3" VerticalAlignment="Top" Width="93" Margin="183,62,0,0" Tag="Spitter" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkSpitter}"/>
+                        <TextBox x:Name="tbxLimitHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,92,0,0" Tag="Hunter" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkHunter}"/>
+                        <TextBox x:Name="tbxLimitJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,122,0,0" Tag="Jockey" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkJockey}"/>
+                        <TextBox x:Name="tbxLimitSmoker" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,153,0,0" Tag="Smoker" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkSmoker}"/>
+                        <TextBox x:Name="tbxLimitCharger" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="2" VerticalAlignment="Top" Width="93" Margin="183,185,0,0" Tag="Charger" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkCharger}"/>
+                        <TextBox x:Name="tbxLimitTank" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="1" VerticalAlignment="Top" Width="93" Margin="183,215,0,0" Tag="Tank" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkTank}"/>
+                        <TextBox x:Name="tbxLimitCommon" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="93" Margin="183,245,0,0" Tag="Common" TextChanged="TbxLimit_TextChanged" IsEnabled="{Binding IsChecked, ElementName=chkCommon}"/>
+                        <CheckBox x:Name="chkCommon" Content="Common" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,249,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkTank" Content="Tank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,218,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkCharger" Content="Charger" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,188,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkSmoker" Content="Smoker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,156,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkJockey" Content="Jockey" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkHunter" Content="Hunter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,95,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkSpitter" Content="Spitter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0" IsChecked="True"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="219" Margin="313,82,0,0">
                         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="107,10,0,0">
@@ -80,9 +80,9 @@
                         </ComboBox>
                         <Label Content="感染者刷新间隔" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,8,0,0"/>
                         <Label Content="生还者倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,70,0,0"/>
-                        <RadioButton Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,105,0,0" Checked="RadioButton_Checked_5"/>
-                        <RadioButton Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0" Checked="RadioButton_Checked_4"/>
-                        <RadioButton Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True" Checked="RadioButton_Checked_3"/>
+                        <RadioButton Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,105,0,0" Checked="RdbIncapMode_Checked" Tag="3"/>
+                        <RadioButton Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0" Checked="RdbIncapMode_Checked" Tag="2"/>
+                        <RadioButton Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True" Checked="RdbIncapMode_Checked" Tag="1"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="219" Margin="313,213,0,0" IsEnabled="False">
                         <Label Content="队友伤害" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,34,0,0"/>
@@ -100,6 +100,7 @@
                         <CheckBox x:Name="chkImproveAI" Content="提升人机智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
                         <CheckBox x:Name="chkPillConvertion" Content="急救包替换为止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,33,0,0"/>
                     </Grid>
+                    <Button x:Name="btnReset" Content="&lt;- 恢复默认值" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Margin="0,0,205,17.667" Click="BtnReset_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="武器资源">
@@ -157,8 +158,8 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦"/><Run Text=" 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
-                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="HypeLink1" Click="HypeLink1_OnClick" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="HypeLink2" Click="HypeLink2_OnClick" ><Run Text="bil"/><Run Text="i清唱"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
                         <Label Content="GitHub项目地址：" Margin="14,32,165,50"/>
                         <Label Content="UP的b站账号：" Margin="31,65,170,15" RenderTransformOrigin="-0.204,-0.317"/>
                         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="0,17,0,0"/>

@@ -24,8 +24,6 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private App app;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -64,14 +62,10 @@ namespace l4d2_mutation_creator
             Regex re = new Regex(@"[^a-z]+");
             e.Handled = re.IsMatch(e.Text);
         }
-        private void HypeLink1_OnClick(object sender, RoutedEventArgs e)
+        private void HypeLink_OnClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/sakamitz/l4d2-mutation-creator");
-        }
-
-        private void HypeLink2_OnClick(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://space.bilibili.com/374026342/");
+            Hyperlink hpl = (Hyperlink)sender;
+            System.Diagnostics.Process.Start(hpl.TargetName);
         }
 
         private void BtnBrowse_Click(object sender, RoutedEventArgs e)
@@ -88,187 +82,35 @@ namespace l4d2_mutation_creator
             }
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void RdbPlayerNumber_Checked(object sender, RoutedEventArgs e)
         {
-            GameOption.PlayerNumber = 1;
-        }
-
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
-        {
-            GameOption.PlayerNumber = 4;
-        }
-
-        private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
-        {
-            GameOption.PlayerNumber = 8;
-        }
-
-        private void RadioButton_Checked_3(object sender, RoutedEventArgs e)
-        {
-            GameOption.IncapMode = 1;
-        }
-
-        private void RadioButton_Checked_4(object sender, RoutedEventArgs e)
-        {
-            GameOption.IncapMode = 2;
-        }
-
-        private void RadioButton_Checked_5(object sender, RoutedEventArgs e)
-        {
-            GameOption.IncapMode = 3;
-        }
-
-        private void ChkBoomer_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkBoomer.IsChecked)
+            if (this.IsLoaded)
             {
-                tbxBoomer.IsEnabled = false;
-                tbxLimitBoomer.IsEnabled = false;
-                tbxLimitBoomer.Text = "0";
-            }
-            else
-            {
-                tbxBoomer.IsEnabled = true;
-                tbxBoomer.Text = "50";
-                tbxLimitBoomer.IsEnabled = true;
-                tbxLimitBoomer.Text = "3";
+                RadioButton rdb = (RadioButton)sender;
+                GameOption.PlayerNumber = Convert.ToInt32(rdb.Tag);
             }
         }
 
-        private void ChkSpitter_Clicked(object sender, RoutedEventArgs e)
+        private void RdbIncapMode_Checked(object sender, RoutedEventArgs e)
         {
-            if (!this.IsLoaded) return;
-            if (false == chkSpitter.IsChecked)
+            if (this.IsLoaded)
             {
-                tbxSpitter.IsEnabled = false;
-                tbxLimitSpitter.IsEnabled = false;
-                tbxLimitSpitter.Text = "0";
-            }
-            else
-            {
-                tbxSpitter.IsEnabled = true;
-                tbxSpitter.Text = "100";
-                tbxLimitSpitter.IsEnabled = true;
-                tbxLimitSpitter.Text = "3";
+                RadioButton rdb = (RadioButton)sender;
+                GameOption.IncapMode = Convert.ToInt32(rdb.Tag);
             }
         }
 
-        private void ChkHunter_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkHunter.IsChecked)
-            {
-                tbxHunter.IsEnabled = false;
-                tbxLimitHunter.IsEnabled = false;
-                tbxLimitHunter.Text = "0";
-            }
-            else
-            {
-                tbxHunter.IsEnabled = true;
-                tbxHunter.Text = "250";
-                tbxLimitHunter.IsEnabled = true;
-                tbxLimitHunter.Text = "2";
-            }
-        }
-
-        private void ChkJockey_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkJockey.IsChecked)
-            {
-                tbxJockey.IsEnabled = false;
-                tbxLimitJockey.IsEnabled = false;
-                tbxLimitJockey.Text = "0";
-            }
-            else
-            {
-                tbxJockey.IsEnabled = true;
-                tbxJockey.Text = "325";
-                tbxLimitJockey.IsEnabled = true;
-                tbxLimitJockey.Text = "2";
-            }
-        }
-
-        private void ChkSmoker_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkSmoker.IsChecked)
-            {
-                tbxSmoker.IsEnabled = false;
-                tbxLimitSmoker.IsEnabled = false;
-                tbxLimitSmoker.Text = "0";
-            }
-            else
-            {
-                tbxSmoker.IsEnabled = true;
-                tbxSmoker.Text = "250";
-                tbxLimitSmoker.IsEnabled = true;
-                tbxLimitSmoker.Text = "2";
-            }
-        }
-
-        private void ChkCharger_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkCharger.IsChecked)
-            {
-                tbxCharger.IsEnabled = false;
-                tbxLimitCharger.IsEnabled = false;
-                tbxLimitCharger.Text = "0";
-            }
-            else
-            {
-                tbxCharger.IsEnabled = true;
-                tbxCharger.Text = "600";
-                tbxLimitCharger.IsEnabled = true;
-                tbxLimitCharger.Text = "2";
-            }
-        }
-
-        private void ChkTank_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkTank.IsChecked)
-            {
-                tbxTank.IsEnabled = false;
-                tbxLimitTank.IsEnabled = false;
-                tbxLimitTank.Text = "0";
-            }
-            else
-            {
-                tbxTank.IsEnabled = true;
-                tbxTank.Text = "1.0";
-                tbxLimitTank.IsEnabled = true;
-                tbxLimitTank.Text = "1";
-            }
-        }
-
-        private void ChkCommon_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (!this.IsLoaded) return;
-            if (false == chkCommon.IsChecked)
-            {
-                tbxLimitCommon.IsEnabled = false;
-                tbxLimitCommon.Text = "0";
-            }
-            else
-            {
-                tbxLimitCommon.IsEnabled = true;
-                tbxLimitCommon.Text = "30";
-            }
-        }
         private void GenVPK(string targetDir)
         {
-            //// addoninfo.txt
-            //// @TODO : vpk description
-            //app.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
+            // addoninfo.txt
+            // @TODO : vpk description
+            App.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
-            //// modes\<mutname.txt>
-            //app.DelectOldModes("template/modes");
-            //app.WriteGameMode(tbxMutName.Text, tbxMutID.Text, BaseGame, PlayerNumber,
-            //    tbxSummary.Text, tbxAuthor.Text);
-            //MessageBox.Show("VPK gen on " + targetDir);
+            // modes\<mutname.txt>
+            App.DelectOldModes("template/modes");
+            App.WriteGameMode(tbxMutName.Text, tbxMutID.Text,
+                tbxSummary.Text, tbxAuthor.Text);
+            MessageBox.Show("VPK gen on " + targetDir);
         }
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
@@ -290,13 +132,44 @@ namespace l4d2_mutation_creator
             GenVPK(dir);
         }
 
-        private void TbxBoomer_TextChanged(object sender, TextChangedEventArgs e)
+        private void TbxHealth_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.IsLoaded)
             {
-                GameOption.SI["Boomer"].SetHealth(Convert.ToInt32(tbxBoomer.Text));
+                TextBox tbx = (TextBox)sender;
+                GameOption.SI[tbx.Tag.ToString()].SetHealth(Convert.ToInt32(tbx.Text));
             }
         }
+
+        private void TbxLimit_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                TextBox tbx = (TextBox)sender;
+                GameOption.SI[tbx.Tag.ToString()].SetLimit(Convert.ToInt32(tbx.Text));
+            }
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox[] tbxHealth = {
+                tbxBoomer, tbxSpitter, tbxHunter, tbxJockey,
+                tbxSmoker, tbxCharger, tbxTank
+            };
+            TextBox[] tbxLimit = {
+                tbxLimitBoomer, tbxLimitSpitter, tbxLimitHunter, tbxLimitJockey,
+                tbxLimitSmoker, tbxLimitCharger, tbxLimitTank
+            };
+
+            for (int i = 0; i < 7; i++)
+            {
+                tbxHealth[i].Text = GameOption.DefaultSI[tbxHealth[i].Tag.ToString()]
+                    .GetHealth().ToString();
+                tbxLimit[i].Text = GameOption.DefaultSI[tbxLimit[i].Tag.ToString()]
+                    .GetLimit().ToString();
+            }
+            tbxLimitCommon.Text = GameOption.DefaultSI["Common"].GetLimit().ToString();
+        }
     }
-    
+
 }
