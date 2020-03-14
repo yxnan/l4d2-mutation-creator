@@ -21,8 +21,12 @@ namespace l4d2_mutation_creator
             // 检查文件完整性（不检查内容）
             if (false == VerifyIntegrity())
             {
-                MessageBox.Show("文件不完整，请转到“帮助”页面重新下载", "",
+                MessageBox.Show("文件不完整，请到“帮助”页面重新下载本软件", "求生之路2变异模式生成器",
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                wnd.grdFirstTab.IsEnabled = false;
+                wnd.grdSecondTab.IsEnabled = false;
+                wnd.grdThirdTab.IsEnabled = false;
+                wnd.lblHasFindGame.Content = "缺失必要文件";
                 wnd.Show();
                 return;
             }

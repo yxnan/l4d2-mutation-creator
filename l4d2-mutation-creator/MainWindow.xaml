@@ -9,7 +9,7 @@
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">
-                <Grid x:Name="gridFirstTab" Background="#FFE5E5E5" Width="604" Height="361" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-10,0">
+                <Grid x:Name="grdFirstTab" Background="#FFE5E5E5" Width="604" Height="361" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-10,0">
                     <TextBox x:Name="tbxGameDir" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="196" Margin="10,14,0,0"/>
                     <Button x:Name="btnBrowse" Content="定位游戏目录" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="230,16,0,0" Click="BtnBrowse_Click"/>
                     <Label x:Name="lblHasFindGame" Content="未找到游戏" HorizontalAlignment="Left" Height="25" Margin="335,14,0,0" VerticalAlignment="Top" Width="89" Foreground="#FFEE0E29"/>
@@ -41,7 +41,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="数据修改">
-                <Grid Background="#FFE5E5E5">
+                <Grid x:Name="grdSecondTab" Background="#FFE5E5E5">
                     <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,60,0,0">
                         <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,1,0,0"/>
                         <Label Content="刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="201,1,0,0"/>
@@ -104,7 +104,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="武器资源">
-                <Grid Background="#FFE5E5E5">
+                <Grid x:Name="grdThirdTab" Background="#FFE5E5E5">
                     <Grid HorizontalAlignment="Left" Height="316" VerticalAlignment="Top" Width="384" Margin="10,10,0,0" IsEnabled="False">
                         <Label Content="武器刷新（功能开发中）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="94,-6,0,0" FontSize="16"/>
                         <Label Content="霰弹枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,30,0,0"/>
