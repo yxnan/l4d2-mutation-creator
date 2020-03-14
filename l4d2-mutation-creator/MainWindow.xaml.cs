@@ -24,14 +24,27 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class MainWindow : Window
     {
+        Helpers helper = new Helpers();
+
+        // 游戏选项
         string BaseGame = "coop";
         int PlayerNumber = 4;
         int IncapMode = 1; // 1 - 普通倒地，2 - 转为黑白，3 - 直接死亡
-        Helpers helper = new Helpers();
+
+        // {"名称", [血量, 刷新上限]}
+        Dictionary<string, Zombie> SI = new Dictionary<string, Zombie>();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // 检查文件完整性（不检查内容）
+            if (false == helper.VerifyIntegrity())
+            {
+                MessageBox.Show("文件不完整，请转到“帮助”页面重新下载", "",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
             // 读取配置文件（记录游戏目录）
             try
@@ -46,8 +59,18 @@ namespace l4d2_mutation_creator
                 }
             }
             catch (Exception) {
-                throw;
+
             }
+
+            // 初始化特感
+            SI.Add("Boomer",  new Zombie(50, 3));
+            SI.Add("Spitter", new Zombie(100, 3));
+            SI.Add("Hunter",  new Zombie(250, 2));
+            SI.Add("Jockey",  new Zombie(325, 2));
+            SI.Add("Smoker",  new Zombie(250, 2));
+            SI.Add("Charger", new Zombie(600, 2));
+            SI.Add("Tank",    new Zombie(4000, 1));
+
         }
         private void HasFoundGame(string GameDir, bool rewrite)
         {
@@ -287,7 +310,6 @@ namespace l4d2_mutation_creator
             //helper.WriteGameMode(tbxMutName.Text, tbxMutID.Text, BaseGame, PlayerNumber,
             //    tbxSummary.Text, tbxAuthor.Text);
             //MessageBox.Show("VPK gen on " + targetDir);
-            MessageBox.Show(helper.VerifyIntegrity().ToString());
         }
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
@@ -307,6 +329,32 @@ namespace l4d2_mutation_creator
         {
             string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             GenVPK(dir);
+        }
+    }
+    public class Zombie
+    {
+        private int Health;
+        private int Limit;
+        public Zombie(int zombieHealth, int zombieLimit)
+        {
+            Health = zombieHealth;
+            Limit = zombieLimit;
+        }
+        public int GetHealth()
+        {
+            return this.Health;
+        }
+        public int GetLimit()
+        {
+            return this.Limit;
+        }
+        public void SetHealth(int newHealth)
+        {
+            this.Health = newHealth;
+        }
+        public void SetLimit(int newLimit)
+        {
+            this.Limit = newLimit;
         }
     }
 
@@ -376,9 +424,8 @@ namespace l4d2_mutation_creator
                     }
                 }
             }
-            catch (Exception)
-            {
-                throw;
+            catch (Exception) {
+
             }
         }
         public void WriteGameMode(string GameName, string GameID, string BaseGame,
