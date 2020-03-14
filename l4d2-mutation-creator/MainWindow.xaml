@@ -45,7 +45,7 @@
                     <Grid HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="286" Margin="10,60,0,0">
                         <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,1,0,0"/>
                         <Label Content="刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="201,1,0,0"/>
-                        <TextBox x:Name="tbxBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,31,0,0"/>
+                        <TextBox x:Name="tbxBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,31,0,0" TextChanged="TbxBoomer_TextChanged"/>
                         <TextBox x:Name="tbxSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="100" VerticalAlignment="Top" Width="93" Margin="79,62,0,0"/>
                         <TextBox x:Name="tbxHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,92,0,0"/>
                         <TextBox x:Name="tbxJockey" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="325" VerticalAlignment="Top" Width="93" Margin="79,122,0,0"/>
