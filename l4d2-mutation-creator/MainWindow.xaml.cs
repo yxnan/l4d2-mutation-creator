@@ -46,6 +46,7 @@ namespace l4d2_mutation_creator
                 }
             }
         }
+
         private void IntegerOnly(object sender, TextCompositionEventArgs e)
         {
             Regex re = new Regex(@"[^0-9]+");
@@ -62,6 +63,7 @@ namespace l4d2_mutation_creator
             Regex re = new Regex(@"[^a-z]+");
             e.Handled = re.IsMatch(e.Text);
         }
+
         private void HypeLink_OnClick(object sender, RoutedEventArgs e)
         {
             Hyperlink hpl = (Hyperlink)sender;
@@ -91,31 +93,127 @@ namespace l4d2_mutation_creator
             }
         }
 
-        private void RdbIncapMode_Checked(object sender, RoutedEventArgs e)
-        {
-            if (this.IsLoaded)
-            {
-                RadioButton rdb = (RadioButton)sender;
-                GameOption.IncapMode = Convert.ToInt32(rdb.Tag);
-            }
-        }
-
         private void GenVPK(string targetDir)
         {
+            // ID 不能为 VSLib
+            if ("vslib" == tbxMutID.Text)
+            {
+                MessageBox.Show("变异ID名不能为vslib，请重新修改", "提示",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
             // addoninfo.txt
             // @TODO : vpk description
             App.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
-            // modes\<mutname.txt>
+            // modes/<mutID>.txt
             App.DelectOldModes("template/modes");
             App.WriteGameMode(tbxMutName.Text, tbxMutID.Text,
                 tbxSummary.Text, tbxAuthor.Text);
+
+            // vscripts/<mutID>.nut
+            App.WriteGameScript(tbxMutID.Text, GenDirector(), GenHookFuncs());
             MessageBox.Show("VPK gen on " + targetDir);
         }
+
+        private string GenDirector()
+        {
+            string DirectorOptions = "DirectorOptions <- {\r\n";
+
+            // 处理 “杂项修改”
+            if (true == chkHeadShot.IsChecked)
+                DirectorOptions += "cm_HeadshotOnly = 1\r\n";
+            if (true == chkNoInGameRespawn.IsChecked)
+                DirectorOptions += "cm_AllowSurvivorRescue = 0\r\n";
+            if (true == chkFirstManOut.IsChecked)
+                DirectorOptions += "cm_FirstManOut = 1\r\n";
+            if (true == chkTempHealth.IsChecked)
+            {
+                DirectorOptions += "cm_TempHealthOnly = 1\r\n";
+                DirectorOptions += ("TempHealthDecayRate = 0.001\r\n" +
+                                   "function RecalculateHealthDecay() {\r\n" +
+                                   "if (Director.HasAnySurvivorLeftSafeArea())\r\n" +
+                                   "TempHealthDecayRate = 0.27}\r\n");
+            }
+
+            // 处理感染者是否可刷新
+            CheckBox[] chkSIAvability = {
+                chkBoomer, chkSpitter, chkHunter, chkJockey,
+                chkSmoker, chkCharger, chkTank, chkCommon
+            };
+            foreach (CheckBox chk in chkSIAvability)
+            {
+                if (false == chk.IsChecked)
+                {
+                    DirectorOptions += (chk.Content.ToString() + "Limit = 0\r\n");
+                }
+            }
+
+            // 处理刷新上限及频率
+            TextBox[] tbxLimit = {
+                tbxLimitBoomer, tbxLimitSpitter, tbxLimitHunter, tbxLimitJockey,
+                tbxLimitSmoker, tbxLimitCharger, tbxLimitTank
+            };
+            int MaxSpecials = 0;
+            foreach (TextBox tbx in tbxLimit)
+            {
+                if (true == tbx.IsEnabled)
+                {
+                    MaxSpecials += Convert.ToInt32(tbx.Text);
+                    DirectorOptions += (tbx.Tag.ToString()+"Limit = "+tbx.Text+"\r\n");
+                }
+            }
+            DirectorOptions += string.Format("MaxSpecials = {0}\r\n", MaxSpecials);
+            DirectorOptions += string.Format("SpecialRespawnInterval = {0}\r\n",
+                                            5+5*cmbInterval.SelectedIndex);
+
+            // 处理倒地状态
+            if (true == chkIncapDying.IsChecked)
+            {
+                DirectorOptions += "cm_AutoReviveFromSpecialIncap = 1\r\n";
+                DirectorOptions += "SurvivorMaxIncapacitatedCount = 1\r\n";
+            }
+            else if (true == chkIncapDeath.IsChecked)
+            {
+                DirectorOptions += "SurvivorMaxIncapacitatedCount = 0\r\n";
+            }
+
+            DirectorOptions += "}\r\n";
+            return DirectorOptions;
+        }
+
+        private string GenHookFuncs()
+        {
+            string HookFuncs = string.Format("function Notifications::OnT"+
+                "ankSpawned::ResetTankHealth(tank, params){{tank.SetHealt"+
+                "h({0});}}\r\n", tbxTank.Text);
+            // 重设体力
+            TextBox[] tbxHealth = {
+                tbxBoomer, tbxSpitter, tbxHunter, tbxJockey,
+                tbxSmoker, tbxCharger
+            };
+            foreach (TextBox tbx in tbxHealth)
+            {
+                HookFuncs += string.Format("function Notifications::OnSpa"+
+                    "wn::Reset{0}Health(player, params){{\r\n" +
+                    "if(player.GetPlayerType()==Z_{1})player.SetHealth({2});}}\r\n",
+                    tbx.Tag.ToString(), tbx.Tag.ToString().ToUpper(), tbx.Text);
+            }
+
+            // Update
+            if (true == chkTempHealth.IsChecked)
+            {
+                HookFuncs += "function Update(){DirectorOptions.RecalculateHealthDecay();}\r\n";
+            }
+            return HookFuncs;
+        }
+
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
             GenVPK("");
         }
+
         private void ChkCoop_Checked(object sender, RoutedEventArgs e)
         {
             GameOption.BaseGame = "coop";

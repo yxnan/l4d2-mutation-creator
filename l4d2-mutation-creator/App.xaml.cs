@@ -52,7 +52,8 @@ namespace l4d2_mutation_creator
             GameOption.InitSI();
             wnd.Show();
         }
-        public bool VerifyIntegrity()
+
+        private bool VerifyIntegrity()
         {
             string[] LibFiles =
             {
@@ -94,6 +95,7 @@ namespace l4d2_mutation_creator
             return true;
 
         }
+
         public static void DelectOldModes(string rootPath)
         {
             if (false == Directory.Exists(rootPath))
@@ -122,6 +124,7 @@ namespace l4d2_mutation_creator
 
             }
         }
+
         public static void WriteGameMode(string GameName, string GameID,
             string GameSummary, string GameAuthor)
         {
@@ -166,13 +169,22 @@ namespace l4d2_mutation_creator
             }
         }
 
+        // @TODO
+        public static void WriteGameScript(string GameID, string DirectorOptions, string HookFuncs)
+        {
+            using (StreamWriter fileScript = new StreamWriter("template/scripts/vscripts/" + GameID + ".nut"))
+            {
+                fileScript.WriteLine("IncludeScript(\"VSLib\");");
+                fileScript.Write(DirectorOptions);
+                fileScript.Write(HookFuncs);
+            }
+        }
     }
     public class GameOption
     {
         // 游戏选项
         public static string BaseGame = "coop";
         public static int PlayerNumber = 4;
-        public static int IncapMode = 1; // 1 - 普通倒地，2 - 转为黑白，3 - 直接死亡
 
         // 感染者字典
         public static Dictionary<string, Zombie> SI = new Dictionary<string, Zombie>();

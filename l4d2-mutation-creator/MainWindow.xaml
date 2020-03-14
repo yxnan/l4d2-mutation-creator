@@ -71,7 +71,7 @@
                         <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,34,0,0" IsChecked="True"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="219" Margin="313,82,0,0">
-                        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="107,10,0,0">
+                        <ComboBox x:Name="cmbInterval" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="107,10,0,0" SelectedIndex="1">
                             <ComboBoxItem Content="5秒"/>
                             <ComboBoxItem Content="10秒" IsSelected="True"/>
                             <ComboBoxItem Content="15秒"/>
@@ -80,9 +80,9 @@
                         </ComboBox>
                         <Label Content="感染者刷新间隔" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,8,0,0"/>
                         <Label Content="生还者倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,70,0,0"/>
-                        <RadioButton Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,105,0,0" Checked="RdbIncapMode_Checked" Tag="3"/>
-                        <RadioButton Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0" Checked="RdbIncapMode_Checked" Tag="2"/>
-                        <RadioButton Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True" Checked="RdbIncapMode_Checked" Tag="1"/>
+                        <RadioButton x:Name="chkIncapDeath" Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,105,0,0"/>
+                        <RadioButton x:Name="chkIncapDying" Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,77,0,0"/>
+                        <RadioButton x:Name="chkIncapLie" Content="普通倒地" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,51,0,0" IsChecked="True"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="219" Margin="313,213,0,0" IsEnabled="False">
                         <Label Content="队友伤害" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,34,0,0"/>
@@ -141,7 +141,7 @@
                         <CheckBox x:Name="chkIncendiary" Content="燃烧弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,257,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkExplosive" Content="高爆弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,278,0,0" IsChecked="True"/>
                     </Grid>
-                    <Grid HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="174" Margin="399,10,0,0">
+                    <Grid HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="174" Margin="399,10,0,0" IsEnabled="False">
                         <CheckBox x:Name="chkFirstAid" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,172,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkPainPill" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,137,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkAdrenaline" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,107,0,0" IsChecked="True"/>
