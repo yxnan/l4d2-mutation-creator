@@ -52,6 +52,13 @@ namespace l4d2_mutation_creator
 
         private bool VerifyIntegrity()
         {
+            // 检查"gamemodes.txt"
+            if (false == File.Exists("template/gamemodes.txt"))
+            {
+                return false;
+            }
+
+            // 检查VSLib库
             string[] LibFiles =
             {
                 "EasyLogic.nut",

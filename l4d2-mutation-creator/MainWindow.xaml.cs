@@ -118,7 +118,9 @@ namespace l4d2_mutation_creator
             }
             catch (Exception)
             {
-                MessageBox.Show("导出文件失败！请检查您对本程序所在目录是否有写入权限！", "文件错误",
+                MessageBox.Show("导出文件失败！可能原因及解决方案：\r\n" +
+                    "1. 同名ID已在游戏中打开，请更换ID再生成，或在附加组件中取消上一次的生成结果再重试\r\n" +
+                    "2. 程序对目标目录没有写入权限", "文件错误",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -142,6 +144,11 @@ namespace l4d2_mutation_creator
                                    "if (Director.HasAnySurvivorLeftSafeArea())\r\n" +
                                    "TempHealthDecayRate = 0.27}\r\n");
             }
+            if (true == rdbOnePlayer.IsChecked)
+            {
+                DirectorOptions += "cm_NoSurvivorBots = 1\r\n";
+            }
+
             if (true == chkImproveAI.IsChecked)
             {
                 File.Copy("template/gamemodes.txt",
