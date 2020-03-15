@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WinForm = System.Windows.Forms;
 using System.Text.RegularExpressions;
+using Path = System.IO.Path;
 
 namespace l4d2_mutation_creator
 {
@@ -68,7 +69,7 @@ namespace l4d2_mutation_creator
             dialog.Description = "请选择Left 4 Dead 2的根目录";
             if (WinForm.DialogResult.OK == dialog.ShowDialog())
             {
-                string exepath = dialog.SelectedPath + "\\left4dead2.exe";
+                string exepath = Path.Combine(dialog.SelectedPath, "left4dead2.exe");
                 if (!File.Exists(exepath))
                 {
                     HasFoundGame(dialog.SelectedPath, true);
@@ -95,21 +96,31 @@ namespace l4d2_mutation_creator
                 return;
             }
 
-            // addoninfo.txt
-            // @TODO : vpk description
-            App.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
+            try
+            {
+                // addoninfo.txt
+                // ignore description
+                App.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
-            // modes/<mutID>.txt
-            App.DelectOldModes("template/modes");
-            App.WriteGameMode(tbxMutName.Text, tbxMutID.Text,
-                tbxSummary.Text, tbxAuthor.Text);
+                // modes/<mutID>.txt
+                App.DelectOldModes("template/modes");
+                App.WriteGameMode(tbxMutName.Text, tbxMutID.Text,
+                    tbxSummary.Text, tbxAuthor.Text);
 
-            // vscripts/<mutID>.nut
-            App.WriteGameScript(tbxMutID.Text, GenDirector(), GenHookFuncs());
-            MessageBox.Show("VPK gen on " + targetDir);
+                // vscripts/<mutID>.nut
+                App.WriteGameScript(tbxMutID.Text, GenDirector(), GenHookFuncs());
 
-            string cmd = "\"" + GameOption.RootPath + "\\bin\\vpk.exe\" " + "template";
-            System.Diagnostics.Process.Start(cmd);
+                string VPKExe = Path.Combine(GameOption.RootPath, "bin/vpk.exe");
+                App.CallExeByProcess(VPKExe, "template");
+
+                File.Copy("template.vpk", Path.Combine(targetDir, tbxMutID.Text + ".vpk"), true);
+                MessageBox.Show("VPK生成成功！路径："+targetDir, "", MessageBoxButton.OK);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("导出文件失败！请检查您对本程序所在目录是否有写入权限！", "文件错误",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private string GenDirector()
@@ -162,6 +173,8 @@ namespace l4d2_mutation_creator
             DirectorOptions += string.Format("MaxSpecials = {0}\r\n", MaxSpecials);
             DirectorOptions += string.Format("SpecialRespawnInterval = {0}\r\n",
                                             5+5*cmbInterval.SelectedIndex);
+            DirectorOptions += "SpecialInitialSpawnDelayMin = 5\r\n";
+            DirectorOptions += "SpecialInitialSpawnDelayMax = 25\r\n";
 
             // 处理倒地状态
             if (true == chkIncapDying.IsChecked)
@@ -209,7 +222,8 @@ namespace l4d2_mutation_creator
 
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
-            GenVPK("");
+            string AddonPath = Path.Combine(GameOption.RootPath, "left4dead2/addons");
+            GenVPK(AddonPath);
         }
 
         private void ChkCoop_Checked(object sender, RoutedEventArgs e)

@@ -20,7 +20,7 @@
                         <RadioButton Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0" Checked="RdbPlayerNumber_Checked" Tag="8"/>
                     </Grid>
                     <TextBox x:Name="tbxDescription" HorizontalAlignment="Left" Height="221" Margin="10,87,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" Width="196"/>
-                    <Label Content="描述（在'附加组件'中显示的内容）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Width="196"/>
+                    <Label Content="描述（上传创意工坊时才有效）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,57,0,0" Width="180"/>
                     <Grid x:Name="gridMiscOptions" HorizontalAlignment="Left" Height="239" Margin="215,69,0,0" VerticalAlignment="Top" Width="224">
                         <Label Content="变异名称" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="81,0,85,0"/>
                         <TextBox x:Name="tbxMutName" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="187" Margin="18,32,19,0"/>

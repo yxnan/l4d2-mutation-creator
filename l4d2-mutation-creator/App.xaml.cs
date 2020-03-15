@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using Path = System.IO.Path;
 
 namespace l4d2_mutation_creator
 {
@@ -42,7 +43,7 @@ namespace l4d2_mutation_creator
             }
             catch (Exception)
             {
-
+                // do nothing if not found conf
             }
 
             GameOption.InitSI();
@@ -165,7 +166,6 @@ namespace l4d2_mutation_creator
             }
         }
 
-        // @TODO
         public static void WriteGameScript(string GameID, string DirectorOptions, string HookFuncs)
         {
             using (StreamWriter fileScript = new StreamWriter("template/scripts/vscripts/" + GameID + ".nut"))
@@ -174,6 +174,25 @@ namespace l4d2_mutation_creator
                 fileScript.Write(DirectorOptions);
                 fileScript.Write(HookFuncs);
             }
+        }
+
+        public static void CallExeByProcess(string ExePath, string argv)
+        {
+            // 开启新线程
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            // 调用的exe的名称
+            process.StartInfo.FileName = ExePath;
+            // 传递进exe的参数
+            process.StartInfo.Arguments = argv;
+            process.StartInfo.UseShellExecute = false;
+            // 不显示exe的界面
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardInput = true;
+            process.Start();
+
+            process.StandardInput.AutoFlush = true;
+            process.WaitForExit();
         }
     }
     public class GameOption
@@ -226,7 +245,6 @@ namespace l4d2_mutation_creator
             return this.Limit;
         }
     }
-
 
     public class Zombie : BaseZombie
     {
