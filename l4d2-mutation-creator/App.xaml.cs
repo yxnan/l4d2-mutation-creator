@@ -35,7 +35,7 @@ namespace l4d2_mutation_creator
                 using (StreamReader sr = new StreamReader("path.dat"))
                 {
                     string exeRootPath = sr.ReadLine();
-                    if (!File.Exists(exeRootPath + "/left4dead2.exe"))
+                    if (File.Exists(exeRootPath + "/left4dead2.exe"))
                     {
                         wnd.HasFoundGame(exeRootPath, false);
                     }

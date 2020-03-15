@@ -70,7 +70,7 @@ namespace l4d2_mutation_creator
             if (WinForm.DialogResult.OK == dialog.ShowDialog())
             {
                 string exepath = Path.Combine(dialog.SelectedPath, "left4dead2.exe");
-                if (!File.Exists(exepath))
+                if (File.Exists(exepath))
                 {
                     HasFoundGame(dialog.SelectedPath, true);
                 }
@@ -142,6 +142,15 @@ namespace l4d2_mutation_creator
                                    "if (Director.HasAnySurvivorLeftSafeArea())\r\n" +
                                    "TempHealthDecayRate = 0.27}\r\n");
             }
+            if (true == chkImproveAI.IsChecked)
+            {
+                File.Copy("template/gamemodes.txt",
+                    "template/modes/gamemodes.txt", true);
+            }
+            else if (File.Exists("template/modes/gamemodes.txt"))
+            {
+                File.Delete("template/modes/gamemodes.txt");
+            }
 
             // 处理感染者是否可刷新
             CheckBox[] chkSIAvability = {
@@ -171,6 +180,7 @@ namespace l4d2_mutation_creator
                 }
             }
             DirectorOptions += string.Format("MaxSpecials = {0}\r\n", MaxSpecials);
+            DirectorOptions += string.Format("TotalSpecials = {0}\r\n", MaxSpecials);
             DirectorOptions += string.Format("SpecialRespawnInterval = {0}\r\n",
                                             5+5*cmbInterval.SelectedIndex);
             DirectorOptions += "SpecialInitialSpawnDelayMin = 5\r\n";
@@ -185,6 +195,17 @@ namespace l4d2_mutation_creator
             else if (true == chkIncapDeath.IsChecked)
             {
                 DirectorOptions += "SurvivorMaxIncapacitatedCount = 0\r\n";
+            }
+
+            // 处理资源刷新与替换
+            if (true == chkPillConvertion.IsChecked)
+            {
+                DirectorOptions += "weaponsToConvert={weapon_first_aid_kit " +
+                                   "= \"weapon_pain_pills_spawn\"}\r\n" +
+                                   "function ConvertWeaponSpawn( classname ){\r\n" +
+                                   "if ( classname in weaponsToConvert ){\r\n" +
+                                   "return weaponsToConvert[classname];}\r\n"+
+                                   "return 0;}\r\n";
             }
 
             DirectorOptions += "}\r\n";
