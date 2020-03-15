@@ -97,7 +97,7 @@
                         <CheckBox x:Name="chkNoInGameRespawn" Content="关闭中途复活点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="199,12,0,0"/>
                         <CheckBox x:Name="chkTempHealth" Content="只有虚血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,12,0,0"/>
                         <CheckBox x:Name="chkHeadShot" Content="必须爆头" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,12,0,0"/>
-                        <CheckBox x:Name="chkImproveAI" Content="提升人机智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
+                        <CheckBox x:Name="chkImproveAI" Content="提升bot智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
                         <CheckBox x:Name="chkPillConvertion" Content="急救包替换为止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,33,0,0"/>
                     </Grid>
                     <Button x:Name="btnReset" Content="&lt;- 恢复默认值" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Margin="0,0,205,17.667" Click="BtnReset_Click"/>
