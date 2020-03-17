@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l4d2_mutation_creator"
         mc:Ignorable="d"
-        Title="求生之路2变异模式生成器（版本：Alpha v0.1 测试版）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
+        Title="求生之路2变异模式生成器（版本：Alpha v0.2 测试版）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">

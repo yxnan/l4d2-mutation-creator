@@ -110,8 +110,7 @@ namespace l4d2_mutation_creator
                 // vscripts/<mutID>.nut
                 App.WriteGameScript(tbxMutID.Text, GenDirector(), GenHookFuncs());
 
-                string VPKExe = Path.Combine(GameOption.RootPath, "bin/vpk.exe");
-                App.CallExeByProcess(VPKExe, "template");
+                App.CallExeByProcess("bin/vpk.exe", "template");
 
                 File.Copy("template.vpk", Path.Combine(targetDir, tbxMutID.Text + ".vpk"), true);
                 MessageBox.Show("VPK生成成功！路径："+targetDir, "", MessageBoxButton.OK);
