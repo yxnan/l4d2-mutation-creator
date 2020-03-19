@@ -58,6 +58,18 @@ namespace l4d2_mutation_creator
                 return false;
             }
 
+            // 检查VPK Pack Tool
+            string[] BinFiles =
+            {
+                "filesystem_stdio.dll",
+                "tier0.dll",
+                "tier0_s.dll",
+                "vpk.exe",
+                "vstdlib.dll",
+                "vstdlib_s.dll"
+            };
+
+
             // 检查VSLib库
             string[] LibFiles =
             {
@@ -73,14 +85,27 @@ namespace l4d2_mutation_creator
             };
 
             string LibDir = "template/scripts/vscripts/VSLib";
-            if (false == Directory.Exists(LibDir)
-             || false == File.Exists(LibDir + ".nut"))
+            if (false == File.Exists(LibDir + ".nut")
+             || false == CheckInFolder(LibDir, LibFiles)
+             || false == CheckInFolder("bin", BinFiles))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CheckInFolder(string DirPath, string[] FileList)
+        {
+            if (false == Directory.Exists(DirPath))
             {
                 return false;
             }
 
-            DirectoryInfo libpath = new DirectoryInfo(LibDir);
-            FileSystemInfo[] fileinfo = libpath.GetFileSystemInfos();
+            DirectoryInfo dir = new DirectoryInfo(DirPath);
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
 
             foreach (FileSystemInfo f in fileinfo)
             {
@@ -90,14 +115,13 @@ namespace l4d2_mutation_creator
                 }
                 else
                 {
-                    if (false == LibFiles.Contains(Path.GetFileName(f.ToString())))
+                    if (false == FileList.Contains(Path.GetFileName(f.ToString())))
                     {
                         return false;
                     }
                 }
             }
             return true;
-
         }
 
         public static void DelectOldModes(string rootPath)
