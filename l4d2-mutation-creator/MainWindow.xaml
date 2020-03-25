@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l4d2_mutation_creator"
         mc:Ignorable="d"
-        Title="求生之路2变异模式生成器（版本：Alpha v0.2 测试版）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize">
+        Title="求生之路2变异模式生成器（版本：v1.0）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize" Closed="MainWindow_Closed">
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">
@@ -105,52 +105,81 @@
             </TabItem>
             <TabItem Header="武器资源">
                 <Grid x:Name="grdThirdTab" Background="#FFE5E5E5">
-                    <Grid HorizontalAlignment="Left" Height="316" VerticalAlignment="Top" Width="384" Margin="10,10,0,0" IsEnabled="True">
-                        <Label Content="武器刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="94,-6,0,0" FontSize="16"/>
-                        <CheckBox x:Name="chkChainsaw" Content="电锯" Tag="weapon_chainsaw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,198,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMelee" Content="所有近战" Tag="weapon_melee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,178,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMagnum" Content="Pistol Magnum" Tag="weapon_pistol_magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,278,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkPistol" Content="Pistol" Tag="weapon_pistol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,258,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMP5" Content="SMG MP5" Tag="weapon_smg_mp5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,60,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
-                        <CheckBox x:Name="chkScout" Content="Sniper Scout" Tag="weapon_sniper_scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,120,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
-                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" Tag="weapon_sniper_awp" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,100,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
-                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" Tag="weapon_rifle_sg552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,80,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
-                        <CheckBox x:Name="chkGrenade" Content="Grenade Launcher" Tag="weapon_grenade_launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,278,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkM60" Content="Rifle M60" Tag="weapon_rifle_m60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,258,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkSMGS" Content="SMG Silenced" Tag="weapon_smg_silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,198,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkSMG" Content="SMG" Tag="weapon_smg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,178,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkSG552_" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,120,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=chkSG552}"/>
-                        <CheckBox x:Name="chkDesert" Content="Rifle Desert" Tag="weapon_rifle_desert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,100,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkAK47" Content="Rifle Ak47" Tag="weapon_rifle_ak47" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,80,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkM16" Content="Rifle M16" Tag="weapon_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,60,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkSPAS" Content="Shotgun SPAS" Tag="weapon_shotgun_spas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,120,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkChrome" Content="Shotgun Chrome" Tag="weapon_shotgun_chrome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkHunting" Content="Hunting Rifle" Tag="weapon_hunting_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,198,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMilitary" Content="Sniper Military" Tag="weapon_sniper_military" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,178,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkPump" Content="Pump Shotgun" Tag="weapon_pumpshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkAuto" Content="Auto Shotgun" Tag="weapon_autoshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <Label Content="霰弹枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,30,0,0"/>
-                        <Label Content="狙击枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,148,0,0"/>
-                        <Label Content="自动步枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,30,0,0"/>
-                        <Label Content="冲锋枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,148,0,0"/>
-                        <Label Content="重武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,228,0,0"/>
-                        <Label Content="隐藏武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,30,0,0"/>
-                        <Label Content="手枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,228,0,0"/>
-                        <Label Content="近战武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,148,0,0"/>
-                        <Label Content="武器升级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,228,0,0"/>
-                        <CheckBox x:Name="chkIncendiary" Tag="weapon_upgradepack_incendiary" Content="燃烧弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,257,0,0" IsChecked="True"/>
-                        <CheckBox x:Name="chkExplosive" Tag="weapon_upgradepack_explosive" Content="高爆弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,278,0,0" IsChecked="True"/>
+                    <Grid HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="384" Margin="10,10,0,0" IsEnabled="True">
+                        <Label Content="武器刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="144,-5,0,0" FontSize="16"/>
+                        <CheckBox x:Name="chkChainsaw" Content="电锯" Tag="weapon_chainsaw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,228,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMelee" Content="所有近战" Tag="weapon_melee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,208,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMagnum" Content="Pistol Magnum" Tag="weapon_pistol_magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,298,0,-17" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkPistol" Content="Pistol" Tag="weapon_pistol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,278,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMP5" Content="SMG MP5" Tag="weapon_smg_mp5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,98,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
+                        <CheckBox x:Name="chkScout" Content="Sniper Scout" Tag="weapon_sniper_scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,158,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
+                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" Tag="weapon_sniper_awp" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,138,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
+                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" Tag="weapon_rifle_sg552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,118,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked"/>
+                        <CheckBox x:Name="chkGrenade" Content="Grenade Launcher" Tag="weapon_grenade_launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,298,0,-17" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkM60" Content="Rifle M60" Tag="weapon_rifle_m60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,278,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkSMGS" Content="SMG Silenced" Tag="weapon_smg_silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,228,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkSMG" Content="SMG" Tag="weapon_smg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,208,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkSG552_" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,158,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=chkSG552}"/>
+                        <CheckBox x:Name="chkDesert" Content="Rifle Desert" Tag="weapon_rifle_desert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,138,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkAK47" Content="Rifle Ak47" Tag="weapon_rifle_ak47" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,118,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkM16" Content="Rifle M16" Tag="weapon_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,98,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkSPAS" Content="Shotgun SPAS" Tag="weapon_shotgun_spas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,158,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkChrome" Content="Shotgun Chrome" Tag="weapon_shotgun_chrome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,138,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkHunting" Content="Hunting Rifle" Tag="weapon_hunting_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,228,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMilitary" Content="Sniper Military" Tag="weapon_sniper_military" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,208,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkPump" Content="Pump Shotgun" Tag="weapon_pumpshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,98,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkAuto" Content="Auto Shotgun" Tag="weapon_autoshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,118,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <Label Content="霰弹枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,70,0,0"/>
+                        <Label Content="狙击枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,178,0,0"/>
+                        <Label Content="自动步枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,70,0,0"/>
+                        <Label Content="冲锋枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,178,0,0"/>
+                        <Label Content="重武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,248,0,0"/>
+                        <Label Content="隐藏武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,71,0,0"/>
+                        <Label Content="手枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,248,0,0"/>
+                        <Label Content="近战武器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,178,0,0"/>
+                        <Label Content="武器升级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,248,0,0"/>
+                        <CheckBox x:Name="chkIncendiary" Tag="weapon_upgradepack_incendiary" Content="燃烧弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,277,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkExplosive" Tag="weapon_upgradepack_explosive" Content="高爆弹升级包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,298,0,-17" IsChecked="True"/>
                     </Grid>
-                    <Grid HorizontalAlignment="Left" Height="325" VerticalAlignment="Top" Width="174" Margin="399,10,0,0">
+                    <Grid HorizontalAlignment="Left" Height="347" VerticalAlignment="Top" Width="174" Margin="399,10,0,-12.333">
                         <Label Content="其他资源" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,0,0,0" FontSize="16"/>
-                        <CheckBox x:Name="chkFirstAid" Tag="weapon_first_aid_kit" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,172,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkPainPill" Tag="weapon_pain_pills" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,137,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkAdrenaline" Tag="weapon_adrenaline" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,107,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkMolotov" Tag="weapon_molotov" Content="燃烧瓶" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,73,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkPipeBomb" Tag="weapon_pipe_bomb" Content="土制炸弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,43,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkDefibUnit" Tag="weapon_defibrillator" Content="起搏器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,208,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkLaser" Tag="upgrade_item" Content="激光瞄准器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,278,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
-                        <CheckBox x:Name="chkAmmo" Tag="ammo" Content="弹药补充点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,243,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkFirstAid" Tag="weapon_first_aid_kit" Content="急救包" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,200,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkPainPill" Tag="weapon_pain_pills" Content="止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,168,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkAdrenaline" Tag="weapon_adrenaline" Content="肾上腺素" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,134,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkMolotov" Tag="weapon_molotov" Content="燃烧瓶" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,71,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkPipeBomb" Tag="weapon_pipe_bomb" Content="土制炸弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,40,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkDefibUnit" Tag="weapon_defibrillator" Content="起搏器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,235,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkLaser" Tag="upgrade_item" Content="激光瞄准器" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,299,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkAmmo" Tag="ammo" Content="弹药补充点" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,268,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                        <CheckBox x:Name="chkVomitjar" Tag="weapon_adrenaline" Content="胆汁" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,101,0,0" IsChecked="True" Checked="ChkItem_Checked" Unchecked="ChkItem_Unchecked"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" Height="43" VerticalAlignment="Top" Width="284" Margin="82,32,0,0">
+                        <RadioButton Content="用允许的武器随机替换" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,21,0,0"/>
+                        <RadioButton x:Name="chkProhibitConvert" Content="直接禁止刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,5,0,0" IsChecked="True"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,5,0,0"><Run FontWeight="Bold" Text="当地图要求刷新"/><LineBreak/><Run FontWeight="Bold" Text="禁止的武器时："/></TextBlock>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="其他修改">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" Height="215" VerticalAlignment="Top" Width="311" Margin="10,10,0,0">
+                        <Label Content="节奏控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,16,0,0" FontSize="16"/>
+                        <CheckBox x:Name="chkLockTempo" Content="锁定节奏（慎用）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,11,0,0"/>
+                        <Button x:Name="btnTempoHelp" Content="选项说明" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="136,31,0,0" Click="BtnTempoHelp_Click"/>
+                        <Label Content="MobSpawnTime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,92,0,0"/>
+                        <Label Content="Min" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="224,64,0,0"/>
+                        <Label Content="Max" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="141,64,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="204,94,0,0" Text="90"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="118,94,0,0" Text="180"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="204,123,0,0" Text="10"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="118,123,0,0" Text="30"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="204,152,0,0" Text="5"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="118,152,0,0" Text="10"/>
+                        <Label Content="MobSize" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,121,0,0"/>
+                        <Label Content="SustainPeakTime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,149,0,0"/>
+                        <Label Content="RelaxInterval" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,177,0,0"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="204,181,0,0" Text="10"/>
+                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" Margin="118,181,0,0" Text="20"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -166,10 +195,10 @@
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
-                        <Label Content="接下去想加入的功能：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,-30,0"/>
-                        <CheckBox Content="更多小细节……" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
-                        <CheckBox Content="事件绑定（如'Tank死亡'-&gt;'刷新尸潮'）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
-                        <CheckBox Content="检查更新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
+                        <CheckBox Content="一些小功能" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
+                        <CheckBox Content="优化尸潮控制逻辑" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
+                        <CheckBox Content="武器、资源刷新控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,13,0,0" Width="131" Height="23"><Run FontWeight="Bold" Text="v1.0版本更新功能："/></TextBlock>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="✦ 欢迎参与本项目！UP的C# WPF开发是现学的，不足之处请多多指正！" VerticalAlignment="Top" Margin="299,243,0,0" Width="268"/>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="299,287,0,0" Height="36" Width="259"><Run Text="✦"/><Run Text=" 本程序完全自由开源，你可以任意传播、修改、发布本程序的源码和二进制文件，不必署名"/></TextBlock>

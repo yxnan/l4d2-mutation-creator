@@ -13,8 +13,10 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class App : Application
     {
+        public static WndTempoHelp wndTempoHelp;
         private void Initialize(object sender, StartupEventArgs e)
         {
+            wndTempoHelp = new WndTempoHelp();
             MainWindow wnd = new MainWindow();
 
             // 检查文件完整性（不检查内容）
@@ -155,6 +157,14 @@ namespace l4d2_mutation_creator
             }
         }
 
+        public static void WriteTest(string str)
+        {
+            using (StreamWriter f = new StreamWriter("test.txt"))
+            {
+                f.Write(str);
+            }
+        }
+
         public static void WriteGameMode(string GameName, string GameID,
             string GameSummary, string GameAuthor)
         {
@@ -228,6 +238,7 @@ namespace l4d2_mutation_creator
             process.WaitForExit();
         }
     }
+
     public class GameOption
     {
         // 游戏路径
@@ -270,10 +281,10 @@ namespace l4d2_mutation_creator
             // 禁止生成的物资
             WeaponToRemove = new ArrayList
             {
-                "weapon_smg_mp5",
-                "weapon_sniper_scout",
-                "weapon_sniper_awp",
-                "weapon_rifle_sg552"
+                "weapon_smg_mp5 = 0",
+                "weapon_sniper_scout = 0",
+                "weapon_sniper_awp = 0",
+                "weapon_rifle_sg552 = 0"
             };
 
             // 允许生成的武器（仅主副武器，不包括弹药、投掷武器、辅助装备）

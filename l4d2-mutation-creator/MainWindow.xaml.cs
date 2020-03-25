@@ -176,21 +176,24 @@ namespace l4d2_mutation_creator
                 tbxLimitBoomer, tbxLimitSpitter, tbxLimitHunter, tbxLimitJockey,
                 tbxLimitSmoker, tbxLimitCharger, tbxLimitTank
             };
-            int MaxSpecials = 0;
+            int TotalSpecials = 0;
             foreach (TextBox tbx in tbxLimit)
             {
                 if (true == tbx.IsEnabled)
                 {
-                    MaxSpecials += Convert.ToInt32(tbx.Text);
+                    TotalSpecials += Convert.ToInt32(tbx.Text);
                     DirectorOptions += (tbx.Tag.ToString()+"Limit = "+tbx.Text+"\r\n");
                 }
             }
-            DirectorOptions += string.Format("MaxSpecials = {0}\r\n", MaxSpecials);
-            DirectorOptions += string.Format("TotalSpecials = {0}\r\n", MaxSpecials);
+            DirectorOptions += "MaxSpecials = 8\r\n";
+            DirectorOptions += string.Format("TotalSpecials = {0}\r\n", TotalSpecials);
             DirectorOptions += string.Format("SpecialRespawnInterval = {0}\r\n",
                                             5+5*cmbInterval.SelectedIndex);
             DirectorOptions += "SpecialInitialSpawnDelayMin = 5\r\n";
             DirectorOptions += "SpecialInitialSpawnDelayMax = 25\r\n";
+            DirectorOptions += "ShouldConstrainLargeVolumeSpawn = false\r\n";
+            DirectorOptions += "PreferredMobDirection = SPAWN_ANYWHERE\r\n";
+            DirectorOptions += "PreferredSpecialDirection = SPAWN_SPECIALS_ANYWHERE\r\n";
 
             // 处理倒地状态
             if (true == chkIncapDying.IsChecked)
@@ -204,15 +207,29 @@ namespace l4d2_mutation_creator
             }
 
             // 处理资源刷新与替换
+            string RemoveItems = "weaponsToRemove = {\r\n";
+            foreach (string item in GameOption.WeaponToRemove)
+            {
+                RemoveItems += (item + "\r\n");
+            }
+            RemoveItems += "}\r\n";
+
+            string AllowedItems = "weaponsAllowed = [\r\n";
+            foreach (string item in GameOption.WeaponAllowed)
+            {
+                AllowedItems += ('"' + item + "\"\r\n");
+            }
+            AllowedItems += "]\r\n";
+            DirectorOptions += (RemoveItems + AllowedItems);
+            DirectorOptions += "function ConvertWeaponSpawn(classname){\r\n";
             if (true == chkPillConvertion.IsChecked)
             {
-                DirectorOptions += "weaponsToConvert={weapon_first_aid_kit " +
-                                   "= \"weapon_pain_pills_spawn\"}\r\n" +
-                                   "function ConvertWeaponSpawn( classname ){\r\n" +
-                                   "if ( classname in weaponsToConvert ){\r\n" +
-                                   "return weaponsToConvert[classname];}\r\n"+
-                                   "return 0;}\r\n";
+                DirectorOptions += "if (classname==\"weapon_first_aid_kit\")\r\n" +
+                                    "return \"weapon_pain_pills_spawn\";\r\n";
             }
+            DirectorOptions += "if (classname in weaponsToRemove)\r\n" +
+                               "return Utils.GetRandValueFromArray(weaponsAllowed);\r\n" +
+                               "return 0;}\r\n";
 
             DirectorOptions += "}\r\n";
             return DirectorOptions;
@@ -320,7 +337,7 @@ namespace l4d2_mutation_creator
             {
                 CheckBox chk = (CheckBox)sender;
                 string weapon = chk.Tag.ToString();
-                GameOption.WeaponToRemove.Remove(weapon);
+                GameOption.WeaponToRemove.Remove(weapon + " = 0");
                 GameOption.WeaponAllowed.Add(weapon + "_spawn");
             }
         }
@@ -331,7 +348,7 @@ namespace l4d2_mutation_creator
             {
                 CheckBox chk = (CheckBox)sender;
                 string weapon = chk.Tag.ToString();
-                GameOption.WeaponToRemove.Add(weapon);
+                GameOption.WeaponToRemove.Add(weapon + " = 0");
                 GameOption.WeaponAllowed.Remove(weapon + "_spawn");
             }
         }
@@ -342,7 +359,7 @@ namespace l4d2_mutation_creator
             {
                 CheckBox chk = (CheckBox)sender;
                 string item = chk.Tag.ToString();
-                GameOption.WeaponToRemove.Remove(item);
+                GameOption.WeaponToRemove.Remove(item + " = 0");
             }
         }
 
@@ -352,10 +369,19 @@ namespace l4d2_mutation_creator
             {
                 CheckBox chk = (CheckBox)sender;
                 string item = chk.Tag.ToString();
-                GameOption.WeaponToRemove.Add(item);
+                GameOption.WeaponToRemove.Add(item + " = 0");
             }
         }
 
+        private void BtnTempoHelp_Click(object sender, RoutedEventArgs e)
+        {
+            App.wndTempoHelp.Show();
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            App.wndTempoHelp.Close();
+        }
     }
 
 }

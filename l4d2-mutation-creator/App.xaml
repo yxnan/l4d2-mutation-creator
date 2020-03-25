@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:l4d2_mutation_creator"
              Startup="Initialize">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

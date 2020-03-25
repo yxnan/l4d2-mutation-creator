@@ -1,0 +1,66 @@
+﻿<Window x:Name="wndTempoHelp" x:Class="l4d2_mutation_creator.WndTempoHelp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:l4d2_mutation_creator"
+        mc:Ignorable="d"
+        Title="选项说明" Height="497" Width="475" ResizeMode="NoResize">
+    <Grid Background="#FFE5E5E5" Margin="0,0,-5.667,-17.667">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="29" Margin="4,13,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="术语" Margin="8.667,-0.333,9.333,-0.333" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="29" Margin="152,13,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="默认值" Margin="8.667,-0.333,9.333,-0.333" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="29" Margin="258,13,0,0" VerticalAlignment="Top" Width="201">
+            <Label Content="说明" Margin="-1.333,0.667,-0.333,-1.333" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="4,42,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="节奏锁定" Margin="-0.667,9.333,0.333,17.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="68" Width="127" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="152,42,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="关闭" Margin="-0.667,9.333,-1,17.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="68" Width="127" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="258,42,0,0" VerticalAlignment="Top" Width="201">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="9.333,-0.667,-10.333,-6.667" Height="102" Width="201"><Run Text="尸潮产生的节奏是这样的"/><Run FontWeight="Bold" Text="："/><LineBreak/><Run FontWeight="Bold" Text="Build Up"/><Run Text="-&gt; "/><Run FontWeight="Bold" Text="产生尸潮 "/><Run Text="-&gt; "/><LineBreak/><Run FontWeight="Bold" Text="S"/><Run FontWeight="Bold" Text="ustain P"/><Run FontWeight="Bold" Text="eak"/><Run FontWeight="Bold" Text=" "/><Run Text="-&gt; "/><Run FontWeight="Bold" Text="Relax"/><Run Text=" -&gt; "/><Run FontWeight="Bold" Text="循环"/><LineBreak/><Run FontWeight="Bold"/><LineBreak/><Run Text="打开节奏锁定会保持"/><Run FontWeight="Bold" Text=" "/><Run FontWeight="Bold" Text="P"/><Run FontWeight="Bold" Text="eak"/><Run FontWeight="Bold" Text=" "/><Run Text="状态，"/><Run/><LineBreak/><Run Text="即"/><Run FontWeight="Bold" Text="无延迟的无限尸潮"/><Run Text="。"/></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="4,138,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="MobSpawnMaxTime&#xD;&#xA;MobSpawnMinTime" Margin="9.333,15.333,10.333,11.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="68" Width="127" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="152,138,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="180-240&#xD;&#xA; 90-120" Margin="-10.667,15.333,-11,11.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="68" Width="127" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="96" Margin="258,138,0,0" VerticalAlignment="Top" Width="201">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="9.5,0.5,9.833,8.5" Height="86" Width="181"><LineBreak/><Run Text="两波尸潮产生的"/><Run FontWeight="Bold" Text="最大"/><Run FontWeight="Bold" Text="/"/><Run FontWeight="Bold" Text="最小时间间隔"/><Run Text="（单位秒"/><Run Text="）。"/><LineBreak/><Run/><LineBreak/><Run/><Run Text="默认值取决于难度"/><Run Text="。"/></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="4,234,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="MobMaxSize&#xD;&#xA;MobMinSize" Margin="9.333,9.333,9.333,9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="128" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="152,234,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="30&#xD;&#xA;10" Margin="9.333,9.333,10,9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="86" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="258,234,0,0" VerticalAlignment="Top" Width="201">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="9.5,9.5,9.833,9.167" Height="43" Width="181"><Run Text="一次尸潮"/><Run FontWeight="Bold" Text="最多"/><Run FontWeight="Bold" Text="/"/><Run FontWeight="Bold" Text="最少"/><Run Text="产生多少"/><Run Text="普通"/><Run Text="感染者"/><Run Text="。"/></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="4,296,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="SustainPeakMaxTime&#xD;&#xA;SustainPeakMinTime" Margin="3.333,9.333,5.333,10.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="138" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="152,296,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="根据地图变化" Margin="9.333,9.333,10,9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="86" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="258,296,0,0" VerticalAlignment="Top" Width="201">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="9.5,5.5,9.167,7.167" Height="49" Width="181"><Run FontWeight="Bold" Text="P"/><Run FontWeight="Bold" Text="eak"/><Run FontWeight="Bold" Text=" "/><Run Text="节奏持续的最"/><Run Text="大"/><Run Text="/"/><Run Text="最小时间"/><Run Text="（单位秒），越大"/><Run Text="则尸潮"/><Run Text="持续时间越长"/></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="4,359,0,0" VerticalAlignment="Top" Width="148">
+            <Label Content="RelaxMaxInterval&#xA;RelaxMinInterval" Margin="3.333,9.333,5.333,10.333" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="138" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="152,359,0,0" VerticalAlignment="Top" Width="106">
+            <Label Content="根据地图变化" Margin="9.333,9.333,10,9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="43" Width="86" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0.5" HorizontalAlignment="Left" Height="63" Margin="258,359,0,0" VerticalAlignment="Top" Width="201">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="9.5,5.5,9.167,9.167" Height="47" Width="181"><Run FontWeight="Bold" Text="Relax"/><Run FontWeight="Bold" Text=" "/><Run Text="节奏持续的最"/><Run Text="大"/><Run Text="/"/><Run Text="最小时间"/><Run Text="（单位秒），"/><Run Text="即无感染者刷新的时间长度"/></TextBlock>
+        </Border>
+        <Button x:Name="btnCloseHelpWindow" Content="关闭" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="169,427,0,0" Height="28" Click="BtnCloseHelpWindow_Click"/>
+    </Grid>
+</Window>
