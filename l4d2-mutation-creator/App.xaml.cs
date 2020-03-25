@@ -50,7 +50,7 @@ namespace l4d2_mutation_creator
             }
 
             GameOption.InitSI();
-            GameOption.InitWeaponList();
+            GameOption.InitTempo();
             wnd.Show();
         }
 
@@ -252,9 +252,15 @@ namespace l4d2_mutation_creator
         public static Dictionary<string, ProfZombie> DefaultSI;
 
         // 允许和禁止的物资
-        public static ArrayList WeaponToRemove;
-        public static ArrayList WeaponAllowed;
+        public static ArrayList WeaponToRemove = new ArrayList();
+        //public static ArrayList HiddenWeapons = new ArrayList();
 
+        // 游戏节奏
+        public static Dictionary<string, int> Tempo;
+
+        // 初始装备
+        public static string[] InitCarries = new string[5];
+        
         public static void InitSI()
         {
             // 初始化感染者
@@ -275,39 +281,20 @@ namespace l4d2_mutation_creator
             }
         }
 
-        // 初始化物资列表
-        public static void InitWeaponList()
+        public static void InitTempo()
         {
-            // 禁止生成的物资
-            WeaponToRemove = new ArrayList
+            Tempo = new Dictionary<string, int>
             {
-                "weapon_smg_mp5 = 0",
-                "weapon_sniper_scout = 0",
-                "weapon_sniper_awp = 0",
-                "weapon_rifle_sg552 = 0"
+                { "MobSpawnMaxTime", 180 },
+                { "MobSpawnMinTime", 90 },
+                { "MobMaxSize", 30 },
+                { "MobMinSize", 10 },
+                { "SustainPeakMaxTime", 10 },
+                { "SustainPeakMinTime", 5 },
+                { "RelaxMaxInterval", 20 },
+                { "RelaxMinInterval", 10 }
             };
 
-            // 允许生成的武器（仅主副武器，不包括弹药、投掷武器、辅助装备）
-            WeaponAllowed = new ArrayList
-            {
-                "weapon_pistol_spawn",
-                "weapon_pistol_magnum_spawn",
-                "weapon_smg_spawn",
-                "weapon_pumpshotgun_spawn",
-                "weapon_autoshotgun_spawn",
-                "weapon_rifle_spawn",
-                "weapon_hunting_rifle_spawn",
-                "weapon_smg_silenced_spawn",
-                "weapon_shotgun_chrome_spawn",
-                "weapon_rifle_desert_spawn",
-                "weapon_sniper_military_spawn",
-                "weapon_shotgun_spas_spawn",
-                "weapon_grenade_launcher_spawn",
-                "weapon_rifle_ak47_spawn",
-                "weapon_rifle_m60_spawn",
-                "weapon_melee_spawn",
-                "weapon_chainsaw_spawn"
-            };
         }
     }
 

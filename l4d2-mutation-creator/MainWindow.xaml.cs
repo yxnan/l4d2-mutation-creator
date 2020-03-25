@@ -124,6 +124,7 @@ namespace l4d2_mutation_creator
             }
         }
 
+        // @TODO: 禁用闲置 & 隐藏武器
         private string GenDirector()
         {
             string DirectorOptions = "DirectorOptions <- {\r\n";
@@ -206,7 +207,7 @@ namespace l4d2_mutation_creator
                 DirectorOptions += "SurvivorMaxIncapacitatedCount = 0\r\n";
             }
 
-            // 处理资源刷新与替换
+            // 处理禁止刷新的资源
             string RemoveItems = "weaponsToRemove = {\r\n";
             foreach (string item in GameOption.WeaponToRemove)
             {
@@ -214,21 +215,40 @@ namespace l4d2_mutation_creator
             }
             RemoveItems += "}\r\n";
 
-            string AllowedItems = "weaponsAllowed = [\r\n";
-            foreach (string item in GameOption.WeaponAllowed)
-            {
-                AllowedItems += ('"' + item + "\"\r\n");
-            }
-            AllowedItems += "]\r\n";
-            DirectorOptions += (RemoveItems + AllowedItems);
-            DirectorOptions += "function ConvertWeaponSpawn(classname){\r\n";
+            DirectorOptions += RemoveItems;
+            DirectorOptions += "function AllowWeaponSpawn(classname){\r\n" +
+                               "if (classname in weaponsToRemove) return false;\r\n" +
+                               "return true;}\r\n";
+
+            // 处理止痛药转换和隐藏武器
             if (true == chkPillConvertion.IsChecked)
             {
-                DirectorOptions += "if (classname==\"weapon_first_aid_kit\")\r\n" +
-                                    "return \"weapon_pain_pills_spawn\";\r\n";
+                DirectorOptions += "weaponsToConvert={weapon_first_aid_kit " +
+                                   "= \"weapon_pain_pills_spawn\"}\r\n" +
+                                   "function ConvertWeaponSpawn(classname){\r\n" +
+                                   "if (classname in weaponsToConvert)\r\n" +
+                                   "return weaponsToConvert[classname];\r\n" +
+                                   "return 0;}\r\n";
             }
-            DirectorOptions += "if (classname in weaponsToRemove)\r\n" +
-                               "return Utils.GetRandValueFromArray(weaponsAllowed);\r\n" +
+
+            // 处理游戏节奏
+            string Tempo = "";
+            foreach (var item in GameOption.Tempo)
+            {
+                Tempo += (item.Key + " = " + item.Value + "\r\n");
+            }
+            DirectorOptions += Tempo;
+
+            // 处理初始武器
+            string DefaultItems = "DefaultItems=[\r\n";
+            foreach (string item in GameOption.InitCarries)
+            {
+                DefaultItems += ('"' + item + "\"\r\n");
+            }
+            DefaultItems += "]\r\n";
+            DirectorOptions += DefaultItems;
+            DirectorOptions += "function GetDefaultItem(idx){\r\n" +
+                               "if (idx<DefaultItems.len()) return DefaultItems[idx];\r\n" +
                                "return 0;}\r\n";
 
             DirectorOptions += "}\r\n";
@@ -266,8 +286,9 @@ namespace l4d2_mutation_creator
 
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
-            string AddonPath = Path.Combine(GameOption.RootPath, "left4dead2/addons");
-            GenVPK(AddonPath);
+            //string AddonPath = Path.Combine(GameOption.RootPath, "left4dead2/addons");
+            //GenVPK(AddonPath);
+            GenDirector();
         }
 
         private void ChkCoop_Checked(object sender, RoutedEventArgs e)
@@ -310,6 +331,18 @@ namespace l4d2_mutation_creator
             }
         }
 
+        private void TbxTempo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                TextBox tbx = (TextBox)sender;
+                if (false == string.IsNullOrWhiteSpace(tbx.Text))
+                {
+                    GameOption.Tempo[tbx.Tag.ToString()] = Convert.ToInt32(tbx.Text);
+                }
+            }
+        }
+
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
             TextBox[] tbxHealth = {
@@ -338,7 +371,6 @@ namespace l4d2_mutation_creator
                 CheckBox chk = (CheckBox)sender;
                 string weapon = chk.Tag.ToString();
                 GameOption.WeaponToRemove.Remove(weapon + " = 0");
-                GameOption.WeaponAllowed.Add(weapon + "_spawn");
             }
         }
 
@@ -349,7 +381,6 @@ namespace l4d2_mutation_creator
                 CheckBox chk = (CheckBox)sender;
                 string weapon = chk.Tag.ToString();
                 GameOption.WeaponToRemove.Add(weapon + " = 0");
-                GameOption.WeaponAllowed.Remove(weapon + "_spawn");
             }
         }
 
@@ -381,6 +412,15 @@ namespace l4d2_mutation_creator
         private void MainWindow_Closed(object sender, EventArgs e)
         {
             App.wndTempoHelp.Close();
+        }
+
+        private void CmbInitCarries_Selected(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                ComboBoxItem item = (ComboBoxItem)sender;
+                GameOption.InitCarries[Convert.ToInt32(item.Uid)] = item.Tag.ToString();
+            }
         }
     }
 
