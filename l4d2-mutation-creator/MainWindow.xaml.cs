@@ -313,6 +313,49 @@ namespace l4d2_mutation_creator
             }
             tbxLimitCommon.Text = GameOption.DefaultSI["Common"].GetLimit().ToString();
         }
+
+        private void ChkWeapon_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                CheckBox chk = (CheckBox)sender;
+                string weapon = chk.Tag.ToString();
+                GameOption.WeaponToRemove.Remove(weapon);
+                GameOption.WeaponAllowed.Add(weapon + "_spawn");
+            }
+        }
+
+        private void ChkWeapon_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                CheckBox chk = (CheckBox)sender;
+                string weapon = chk.Tag.ToString();
+                GameOption.WeaponToRemove.Add(weapon);
+                GameOption.WeaponAllowed.Remove(weapon + "_spawn");
+            }
+        }
+
+        private void ChkItem_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                CheckBox chk = (CheckBox)sender;
+                string item = chk.Tag.ToString();
+                GameOption.WeaponToRemove.Remove(item);
+            }
+        }
+
+        private void ChkItem_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                CheckBox chk = (CheckBox)sender;
+                string item = chk.Tag.ToString();
+                GameOption.WeaponToRemove.Add(item);
+            }
+        }
+
     }
 
 }
