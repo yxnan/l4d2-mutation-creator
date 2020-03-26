@@ -215,6 +215,11 @@ namespace l4d2_mutation_creator
             {
                 DirectorOptions += "SurvivorMaxIncapacitatedCount = 0\r\n";
             }
+            else if (true == chkIncapEscape.IsChecked)
+            {
+                DirectorOptions += "cm_AutoReviveFromSpecialIncap = 1\r\n";
+                DirectorOptions += "SurvivorMaxIncapacitatedCount = 999\r\n";
+            }
 
             // 处理禁止刷新的资源
             string RemoveItems = "weaponsToRemove = {\r\n";

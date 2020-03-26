@@ -17,7 +17,7 @@
                         <Label Content="允许玩家数量" HorizontalAlignment="Center" VerticalAlignment="Top" Width="91"/>
                         <RadioButton x:Name="rdbOnePlayer" Content="1人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" Checked="RdbPlayerNumber_Checked" Tag="1"/>
                         <RadioButton x:Name="rdbFourPlayer" Content="4人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,51,0,0" IsChecked="True" Checked="RdbPlayerNumber_Checked" Tag="4"/>
-                        <RadioButton x:Name="rdbEightPlayer" Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0" Checked="RdbPlayerNumber_Checked" Tag="8" IsEnabled="False"/>
+                        <RadioButton x:Name="rdbEightPlayer" Content="8人" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,71,0,0" Checked="RdbPlayerNumber_Checked" Tag="8"/>
                     </Grid>
                     <TextBox x:Name="tbxDescription" HorizontalAlignment="Left" Height="221" Margin="10,87,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Top" Width="196"/>
                     <Label Content="描述（上传创意工坊时才有效）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,57,0,0" Width="180"/>
@@ -176,7 +176,7 @@
                         <Label Content="RelaxInterval" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,185,0,0"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="199" Margin="357,46,0,0">
-                        <Label Content="队友伤害" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+                        <Label Content="队友伤害*" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
                         <Label Content="难度" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,31,0,0" FontWeight="Bold"/>
                         <Label Content="因子" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,31,0,0" FontWeight="Bold"/>
                         <Label Content="简单" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,56,0,0"/>
@@ -197,9 +197,9 @@
                             <ComboBoxItem Content="M60" Tag="rifle_m60" Selected="CmbInitCarries_Selected" Uid="0"/>
                         </ComboBox>
                         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="73" Margin="184,22,0,22">
-                            <ComboBoxItem Content="（默认）" Tag="" IsSelected="True" Selected="CmbInitCarries_Selected" Uid="1"/>
+                            <ComboBoxItem Content="（无）" Tag="" IsSelected="True" Selected="CmbInitCarries_Selected" Uid="1"/>
                             <ComboBoxItem Content="马格南" Tag="pistol_magnum" Selected="CmbInitCarries_Selected" Uid="1"/>
-                            <ComboBoxItem Content="小刀" Tag="knife" Selected="CmbInitCarries_Selected" Uid="1"/>
+                            <ComboBoxItem Content="消防斧" Tag="fireaxe" Selected="CmbInitCarries_Selected" Uid="1"/>
                             <ComboBoxItem Content="电锯" Tag="chainsaw" Selected="CmbInitCarries_Selected" Uid="1"/>
                         </ComboBox>
                         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Margin="279,22,0,22">
@@ -220,18 +220,19 @@
                         </ComboBox>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="565" Margin="19,284,0,0">
-                        <CheckBox x:Name="chkInfAmmo" Content="无限备弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="191,14,0,0"/>
-                        <CheckBox x:Name="chkReviveFull" Content="复活后满血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="278,14,0,0"/>
+                        <CheckBox x:Name="chkInfAmmo" Content="无限备弹*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,14,0,0"/>
+                        <CheckBox x:Name="chkReviveFull" Content="复活后满血*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="276,14,0,0"/>
                     </Grid>
+                    <Label Content="注：打'*'号的表示仅在服务器中有效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="375,16,0,0" Width="209"/>
                 </Grid>
             </TabItem>
             <TabItem Header="帮助说明">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦ 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
-                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator/releases" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
                         <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
-                        <Label Content="GitHub项目地址：" Margin="14,32,165,50"/>
+                        <Label Content="查看更新(Github)：" Margin="14,32,165,50"/>
                         <Label Content="UP的b站账号：" Margin="31,65,170,15" RenderTransformOrigin="-0.204,-0.317"/>
                         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="0,17,0,0"/>
                     </Grid>
@@ -242,8 +243,7 @@
                         <CheckBox Content="武器、资源刷新控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,13,0,0" Width="131" Height="23"><Run FontWeight="Bold" Text="v1.0版本更新功能："/></TextBlock>
                     </Grid>
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="✦ 欢迎参与本项目！UP的C# WPF开发是现学的，不足之处请多多指正！" VerticalAlignment="Top" Margin="299,243,0,0" Width="268"/>
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="299,287,0,0" Height="36" Width="259"><Run Text="✦"/><Run Text=" 本程序完全自由开源，你可以任意传播、修改、发布本程序的源码和二进制文件，不必署名"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="293,232,0,0" Height="76" Width="259" FontSize="14"><Run Text="✦"/><Run Text=" 本程序"/><Run Text="遵循Unlicense协议，"/><Run Text="完全自由开源，你可以任意"/><Run Text="使用、"/><Run Text="传播、修改、发布本程序的源码和二进制文件，不必"/><Run Text="取得我的授权或"/><Run Text="署"/><Run Text="上我的名字"/></TextBlock>
                 </Grid>
             </TabItem>
         </TabControl>
