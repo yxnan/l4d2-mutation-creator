@@ -49,8 +49,7 @@ namespace l4d2_mutation_creator
                 // do nothing if not found conf
             }
 
-            GameOption.InitSI();
-            GameOption.InitTempo();
+            GameOption.InitGameOption();
             wnd.Show();
         }
 
@@ -182,12 +181,20 @@ namespace l4d2_mutation_creator
                     "\"DisplayTitle\"  \"{3}\"\r\n" +
                     "\"Description\"   \"{4}\"\r\n" +
                     "\"Image\"     \"maps/any\"\r\n" +
-                    "\"Author\"    \"{5}\"}}";
+                    "\"Author\"    \"{5}\"}}\r\n";
 
                 strMode = string.Format(strMode, GameID, GameOption.BaseGame,
                     GameOption.PlayerNumber, GameName.Trim(),
                     GameSummary.Trim(), GameAuthor.Trim());
-                fileMode.Write(strMode);
+
+                string Convars = "convar{\r\n";
+                foreach (var cvar in GameOption.Convars)
+                {
+                    Convars += (cvar.Key +" "+cvar.Value + "\r\n");
+                }
+                Convars += "}\r\n";
+
+                fileMode.Write(strMode + Convars);
             }
         }
 
@@ -214,6 +221,7 @@ namespace l4d2_mutation_creator
             using (StreamWriter fileScript = new StreamWriter("template/scripts/vscripts/" + GameID + ".nut"))
             {
                 fileScript.WriteLine("IncludeScript(\"VSLib\");");
+                fileScript.WriteLine("Utils.PrecacheCSSWeapons();");
                 fileScript.Write(DirectorOptions);
                 fileScript.Write(HookFuncs);
             }
@@ -246,22 +254,30 @@ namespace l4d2_mutation_creator
         // 游戏选项
         public static string BaseGame = "coop";
         public static int PlayerNumber = 4;
+        public static Dictionary<string, string> Convars;
 
         // 感染者字典
         public static Dictionary<string, Zombie> SI;
         public static Dictionary<string, ProfZombie> DefaultSI;
 
-        // 允许和禁止的物资
-        public static ArrayList WeaponToRemove = new ArrayList();
-        //public static ArrayList HiddenWeapons = new ArrayList();
+        // 禁止的物资
+        public static ArrayList WeaponToRemove;
 
         // 游戏节奏
         public static Dictionary<string, int> Tempo;
 
         // 初始装备
         public static string[] InitCarries = new string[5];
+
+        public static void InitGameOption()
+        {
+            WeaponToRemove = new ArrayList();
+            Convars = new Dictionary<string, string>();
+            InitSI();
+            InitTempo();
+        }
         
-        public static void InitSI()
+        private static void InitSI()
         {
             // 初始化感染者
             SI = new Dictionary<string, Zombie>();
@@ -281,7 +297,7 @@ namespace l4d2_mutation_creator
             }
         }
 
-        public static void InitTempo()
+        private static void InitTempo()
         {
             Tempo = new Dictionary<string, int>
             {
@@ -294,7 +310,6 @@ namespace l4d2_mutation_creator
                 { "RelaxMaxInterval", 20 },
                 { "RelaxMinInterval", 10 }
             };
-
         }
     }
 

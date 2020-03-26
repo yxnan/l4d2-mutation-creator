@@ -45,12 +45,13 @@ namespace l4d2_mutation_creator
             Regex re = new Regex(@"[^0-9]+");
             e.Handled = re.IsMatch(e.Text);
         }
-        // @TODO
-        //private void RealOnly(object sender, TextCompositionEventArgs e)
-        //{
-        //    Regex re = new Regex(@"[^0-9]+[^\.]?[^0-9]*");
-        //    e.Handled = re.IsMatch(e.Text);
-        //}
+        
+        private void RealOnly(object sender, TextCompositionEventArgs e)
+        {
+            Regex re = new Regex(@"^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !re.IsMatch(e.Text);
+        }
+
         private void AlphabetOnly(object sender, TextCompositionEventArgs e)
         {
             Regex re = new Regex(@"[^a-z]+");
@@ -86,15 +87,24 @@ namespace l4d2_mutation_creator
             }
         }
 
+        // @TODO: 禁用闲置
         private void GenVPK(string targetDir)
         {
             // ID 不能为空或 VSLib
             if ("" == tbxMutID.Text || "vslib" == tbxMutID.Text)
             {
-                MessageBox.Show("变异ID名不能为空或vslib，请重新修改", "提示",
+                MessageBox.Show("变异ID名不能为这三种之一：为空、vslib、gamemodes，请重新修改", "提示",
                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
+
+            // 处理cvar
+            if (true == chkInfAmmo.IsChecked)
+                GameOption.Convars["sv_infinite_primary_ammo"] = "1";
+            if (true == chkReviveFull.IsChecked)
+                GameOption.Convars["survivor_revive_health"] = "100";
+            if (true == chkNoIdle.IsChecked)
+                GameOption.Convars["mp_allowspectators"] = "0";
 
             try
             {
@@ -124,7 +134,6 @@ namespace l4d2_mutation_creator
             }
         }
 
-        // @TODO: 禁用闲置 & 隐藏武器
         private string GenDirector()
         {
             string DirectorOptions = "DirectorOptions <- {\r\n";
@@ -221,17 +230,31 @@ namespace l4d2_mutation_creator
                                "return true;}\r\n";
 
             // 处理止痛药转换和隐藏武器
+            string WeaponsToConvert = "weaponsToConvert={\r\n";
             if (true == chkPillConvertion.IsChecked)
-            {
-                DirectorOptions += "weaponsToConvert={weapon_first_aid_kit " +
-                                   "= \"weapon_pain_pills_spawn\"}\r\n" +
-                                   "function ConvertWeaponSpawn(classname){\r\n" +
-                                   "if (classname in weaponsToConvert)\r\n" +
-                                   "return weaponsToConvert[classname];\r\n" +
-                                   "return 0;}\r\n";
-            }
+                WeaponsToConvert += "weapon_first_aid_kit=\"weapon_pain_pills_spawn\"\r\n";
+            if (true == chkAWP.IsChecked)
+                WeaponsToConvert += "weapon_sniper_military=\"weapon_sniper_awp_spawn\"\r\n";
+            if (true == chkMP5.IsChecked)
+                WeaponsToConvert += "weapon_smg=\"weapon_smg_spawn\"\r\n";
+            if (true == chkScout.IsChecked)
+                WeaponsToConvert += "weapon_hunting_rifle=\"weapon_sniper_scout_spawn\"\r\n";
+            if (true == chkSG552.IsChecked)
+                WeaponsToConvert += "weapon_rifle=\"weapon_rifle_sg552_spawn\"\r\n";
+
+            WeaponsToConvert += "}\r\n";
+
+            DirectorOptions += WeaponsToConvert;
+            DirectorOptions += "function ConvertWeaponSpawn(classname){\r\n" +
+                               "if (classname in weaponsToConvert)\r\n" +
+                               "return weaponsToConvert[classname];\r\n" +
+                               "return 0;}\r\n";
+
 
             // 处理游戏节奏
+            if (true == chkLockTempo.IsChecked)
+                DirectorOptions += "LockTempo = 1\r\n";
+
             string Tempo = "";
             foreach (var item in GameOption.Tempo)
             {
@@ -286,9 +309,8 @@ namespace l4d2_mutation_creator
 
         private void BtnGenVPK_Click(object sender, RoutedEventArgs e)
         {
-            //string AddonPath = Path.Combine(GameOption.RootPath, "left4dead2/addons");
-            //GenVPK(AddonPath);
-            GenDirector();
+            string AddonPath = Path.Combine(GameOption.RootPath, "left4dead2/addons");
+            GenVPK(AddonPath);
         }
 
         private void ChkCoop_Checked(object sender, RoutedEventArgs e)
@@ -339,6 +361,18 @@ namespace l4d2_mutation_creator
                 if (false == string.IsNullOrWhiteSpace(tbx.Text))
                 {
                     GameOption.Tempo[tbx.Tag.ToString()] = Convert.ToInt32(tbx.Text);
+                }
+            }
+        }
+
+        private void TbxCvars_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                TextBox tbx = (TextBox)sender;
+                if (false == string.IsNullOrWhiteSpace(tbx.Text))
+                {
+                    GameOption.Convars[tbx.Tag.ToString()] = tbx.Text;
                 }
             }
         }

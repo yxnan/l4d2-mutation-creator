@@ -95,10 +95,10 @@
                         <ComboBoxItem Content="20秒"/>
                         <ComboBoxItem Content="25秒"/>
                     </ComboBox>
-                    <Grid HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="208" Margin="324,236,0,0" IsEnabled="False">
+                    <Grid HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="208" Margin="324,236,0,0">
                         <Label Content="禁用闲置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,14,0,0"/>
                         <RadioButton Content="否" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,31,0,0" IsChecked="True"/>
-                        <RadioButton x:Name="chkNoBreak" Content="是" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,9,0,0"/>
+                        <RadioButton x:Name="chkNoIdle" Content="是" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,9,0,0"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -110,10 +110,10 @@
                         <CheckBox x:Name="chkMelee" Content="所有近战" Tag="weapon_melee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,172,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkMagnum" Content="Pistol Magnum" Tag="weapon_pistol_magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkPistol" Content="Pistol" Tag="weapon_pistol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,252,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMP5" Content="SMG MP5" Tag="weapon_smg_mp5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,54,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsEnabled="False"/>
-                        <CheckBox x:Name="chkScout" Content="Sniper Scout" Tag="weapon_sniper_scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,114,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsEnabled="False"/>
-                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" Tag="weapon_sniper_awp" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,94,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsEnabled="False"/>
-                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" Tag="weapon_rifle_sg552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,74,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsEnabled="False"/>
+                        <CheckBox x:Name="chkMP5" Content="SMG MP5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,54,0,0"/>
+                        <CheckBox x:Name="chkScout" Content="Sniper Scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,114,0,0"/>
+                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,94,0,0"/>
+                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,74,0,0"/>
                         <CheckBox x:Name="chkGrenade" Content="Grenade Launcher" Tag="weapon_grenade_launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkM60" Content="Rifle M60" Tag="weapon_rifle_m60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,252,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkSMGS" Content="SMG Silenced" Tag="weapon_smg_silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
@@ -177,16 +177,16 @@
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="199" Margin="357,46,0,0">
                         <Label Content="队友伤害" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-                        <Label Content="简单" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,56,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100" Margin="79,58,0,0"/>
                         <Label Content="难度" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,31,0,0" FontWeight="Bold"/>
                         <Label Content="因子" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,31,0,0" FontWeight="Bold"/>
+                        <Label Content="简单" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,56,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_easy" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0" VerticalAlignment="Top" Width="100" Margin="79,58,0,0" TextChanged="TbxCvars_TextChanged"/>
                         <Label Content="普通" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,87,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0.1" VerticalAlignment="Top" Width="100" Margin="79,89,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_normal" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.1" VerticalAlignment="Top" Width="100" Margin="79,89,0,0" TextChanged="TbxCvars_TextChanged"/>
                         <Label Content="高级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,118,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0.3" VerticalAlignment="Top" Width="100" Margin="79,120,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_hard" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.3" VerticalAlignment="Top" Width="100" Margin="79,120,0,0" TextChanged="TbxCvars_TextChanged"/>
                         <Label Content="专家" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,149,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0.5" VerticalAlignment="Top" Width="100" Margin="79,151,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_expert" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.5" VerticalAlignment="Top" Width="100" Margin="79,151,0,0" TextChanged="TbxCvars_TextChanged"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="565" Margin="19,228,0,0">
                         <Label Content="初始装备" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16"/>
