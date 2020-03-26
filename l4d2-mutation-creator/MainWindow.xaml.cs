@@ -151,7 +151,8 @@ namespace l4d2_mutation_creator
                 DirectorOptions += ("TempHealthDecayRate = 0.001\r\n" +
                                    "function RecalculateHealthDecay() {\r\n" +
                                    "if (Director.HasAnySurvivorLeftSafeArea())\r\n" +
-                                   "TempHealthDecayRate = 0.27}\r\n");
+                                   "TempHealthDecayRate = " +
+                                   tbxDecayRate.Text + "}\r\n");
             }
             if (true == rdbOnePlayer.IsChecked)
             {
@@ -182,23 +183,28 @@ namespace l4d2_mutation_creator
             }
 
             // 处理刷新上限及频率
+            DirectorOptions += "cm_ProhibitBosses = false\r\n";
+
             TextBox[] tbxLimit = {
                 tbxLimitBoomer, tbxLimitSpitter, tbxLimitHunter, tbxLimitJockey,
-                tbxLimitSmoker, tbxLimitCharger, tbxLimitTank
+                tbxLimitSmoker, tbxLimitCharger
             };
-            int TotalSpecials = 0;
             foreach (TextBox tbx in tbxLimit)
             {
                 if (true == tbx.IsEnabled)
                 {
-                    TotalSpecials += Convert.ToInt32(tbx.Text);
                     DirectorOptions += (tbx.Tag.ToString()+"Limit = "+tbx.Text+"\r\n");
                 }
             }
-            DirectorOptions += "MaxSpecials = 8\r\n";
-            DirectorOptions += string.Format("TotalSpecials = {0}\r\n", TotalSpecials);
-            DirectorOptions += string.Format("SpecialRespawnInterval = {0}\r\n",
-                                            5+5*cmbInterval.SelectedIndex);
+            DirectorOptions += ("cm_TankLimit = " + tbxLimitTank.Text + "\r\n");
+
+            if (true == chkInfTotalSpecial.IsChecked)
+            {
+                DirectorOptions += "TotalSpecials = 999\r\n";
+            }
+            DirectorOptions += "cm_MaxSpecials = 8\r\n";
+            DirectorOptions += string.Format("cm_SpecialRespawnInterval = {0}\r\n",
+                               ((ComboBoxItem)cmbInterval.SelectedItem).Tag.ToString());
             DirectorOptions += "SpecialInitialSpawnDelayMin = 5\r\n";
             DirectorOptions += "SpecialInitialSpawnDelayMax = 25\r\n";
             DirectorOptions += "ShouldConstrainLargeVolumeSpawn = false\r\n";
