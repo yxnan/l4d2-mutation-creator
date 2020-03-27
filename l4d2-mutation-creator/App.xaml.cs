@@ -13,6 +13,8 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class App : Application
     {
+        public static string ver = "v1.2";
+
         public static WndTempoHelp wndTempoHelp;
         private void Initialize(object sender, StartupEventArgs e)
         {
@@ -27,6 +29,7 @@ namespace l4d2_mutation_creator
                 wnd.grdFirstTab.IsEnabled = false;
                 wnd.grdSecondTab.IsEnabled = false;
                 wnd.grdThirdTab.IsEnabled = false;
+                wnd.grdForthTab.IsEnabled = false;
                 wnd.lblHasFindGame.Content = "缺失必要文件";
                 wnd.Show();
                 return;
@@ -50,13 +53,17 @@ namespace l4d2_mutation_creator
             }
 
             GameOption.InitGameOption();
+
+            //显示版本
+            wnd.Title = string.Format(wnd.Title, App.ver);
+            wnd.lblVersion.Content = string.Format(wnd.lblVersion.Content.ToString(), App.ver);
             wnd.Show();
         }
 
         private bool VerifyIntegrity()
         {
             // 检查"gamemodes.txt"
-            if (false == File.Exists("template/gamemodes.txt"))
+            if (false == File.Exists("template/raw_gamemodes.txt"))
             {
                 return false;
             }
@@ -127,26 +134,48 @@ namespace l4d2_mutation_creator
             return true;
         }
 
-        public static void DelectOldModes(string rootPath)
+        public static void DelectOldFiles()
         {
-            if (false == Directory.Exists(rootPath))
+            string ModePath = "template/modes";
+            string ScriptPath = "template/scripts/vscripts";
+
+            if (false == Directory.Exists(ModePath))
             {
                 return;
             }
             try
             {
-                DirectoryInfo dir = new DirectoryInfo(rootPath);
-                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
-                foreach (FileSystemInfo f in fileinfo)
+                // 清理 ModePath
+                DirectoryInfo dir1 = new DirectoryInfo(ModePath);
+                FileSystemInfo[] fileinfo1 = dir1.GetFileSystemInfos();
+                foreach (FileSystemInfo f in fileinfo1)
                 {
                     if (f is DirectoryInfo)
                     {
-                        //DirectoryInfo subdir = new DirectoryInfo(f.FullName);
-                        //subdir.Delete(true);
+                        DirectoryInfo subdir = new DirectoryInfo(f.FullName);
+                        subdir.Delete(true);
                     }
                     else
                     {
                         File.Delete(f.FullName);
+                    }
+                }
+
+                //清理 ScriptPath
+                DirectoryInfo dir2 = new DirectoryInfo(ScriptPath);
+                FileSystemInfo[] fileinfo2 = dir2.GetFileSystemInfos();
+                foreach (FileSystemInfo f in fileinfo2)
+                {
+                    if (f is DirectoryInfo)
+                    {
+                        // do nothing
+                    }
+                    else
+                    {
+                        if (f.Name != "VSLib.nut")
+                        {
+                            File.Delete(f.FullName);
+                        }
                     }
                 }
             }

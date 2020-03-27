@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l4d2_mutation_creator"
         mc:Ignorable="d"
-        Title="求生之路2变异模式生成器（版本：v1.1）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize" Closed="MainWindow_Closed">
+        Title="求生之路2变异模式生成器（版本：{0}）" Height="400" Width="600" MinWidth="600" MinHeight="400" ResizeMode="NoResize" Closed="MainWindow_Closed">
     <Grid x:Name="grid" Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-5.333,0" Width="600" Height="372">
             <TabItem Header="基本配置">
@@ -69,7 +69,7 @@
                         <CheckBox x:Name="chkHunter" Content="Hunter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkSpitter" Content="Spitter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,57,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0" IsChecked="True"/>
-                        <Label Content="注：血量修改只有低于这个值才有效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,244,0,0" FontWeight="Bold"/>
+                        <Label Content="注：血量修改可以高于该种特感的上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,244,0,0" FontWeight="Bold"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="219" Margin="313,121,0,0">
                         <Label Content="生还者被控&#xD;&#xA;至体力为零" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,36,0,0"/>
@@ -157,7 +157,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="其他修改">
-                <Grid Background="#FFE5E5E5">
+                <Grid x:Name="grdForthTab" Background="#FFE5E5E5">
                     <Grid HorizontalAlignment="Left" Height="226" VerticalAlignment="Top" Width="311" Margin="10,10,0,0">
                         <Label Content="节奏控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,16,0,0" FontSize="16"/>
                         <CheckBox x:Name="chkLockTempo" Content="锁定节奏（慎用）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,61,0,0"/>
@@ -234,18 +234,20 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦ 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
-                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator/releases" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
                         <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
-                        <Label Content="查看更新(Github)：" Margin="14,32,165,50"/>
-                        <Label Content="UP的b站账号：" Margin="31,65,170,15" RenderTransformOrigin="-0.204,-0.317"/>
-                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="0,17,0,0"/>
+                        <Label Content="Github项目地址：" Margin="19,32,165,58"/>
+                        <Label Content="UP的b站账号：" Margin="25,65,175,15" RenderTransformOrigin="-0.204,-0.317"/>
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="7,17,0,0"/>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
                         <CheckBox Content="优化特感刷新机制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
                         <CheckBox Content="尸潮节奏控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
                         <CheckBox Content="武器、资源刷新控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,13,0,0" Width="201" Height="23"><Run FontWeight="Bold" Text="v1.0"/><Run FontWeight="Bold" Text="、v1.1"/><Run FontWeight="Bold" Text="版本更新功能："/></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,13,0,0" Width="201" Height="23"><Run FontWeight="Bold" Text="近几个版本主要"/><Run FontWeight="Bold" Text="更新："/></TextBlock>
+                        <Button x:Name="btnCheckUpd" Content="检查更新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="167,52,0,0" Height="37" Click="BtnCheckUpd_Click"/>
+                        <Label x:Name="lblVersion" Content="当前版本：{0}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,18,0,0" Foreground="Gray"/>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="293,232,0,0" Height="76" Width="259" FontSize="14"><Run Text="✦"/><Run Text=" 本程序"/><Run Text="遵循Unlicense协议，"/><Run Text="完全自由开源，你可以任意"/><Run Text="使用、"/><Run Text="传播、修改、发布本程序的源码和二进制文件，不必"/><Run Text="取得我的授权或"/><Run Text="署"/><Run Text="上我的名字"/></TextBlock>
                 </Grid>

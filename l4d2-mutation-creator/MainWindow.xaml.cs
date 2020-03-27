@@ -113,7 +113,7 @@ namespace l4d2_mutation_creator
                 App.WriteGameInfo(tbxMutName.Text, tbxAuthor.Text, tbxSummary.Text);
 
                 // modes/<mutID>.txt
-                App.DelectOldModes("template/modes");
+                App.DelectOldFiles();
                 App.WriteGameMode(tbxMutName.Text, tbxMutID.Text,
                     tbxSummary.Text, tbxAuthor.Text);
 
@@ -161,7 +161,7 @@ namespace l4d2_mutation_creator
 
             if (true == chkImproveAI.IsChecked)
             {
-                File.Copy("template/gamemodes.txt",
+                File.Copy("template/raw_gamemodes.txt",
                     "template/modes/gamemodes.txt", true);
             }
             else if (File.Exists("template/modes/gamemodes.txt"))
@@ -291,9 +291,10 @@ namespace l4d2_mutation_creator
 
         private string GenHookFuncs()
         {
-            string HookFuncs = string.Format("function Notifications::OnT"+
-                "ankSpawned::ResetTankHealth(tank, params){{tank.SetHealt"+
-                "h({0});}}\r\n", tbxTank.Text);
+            string HookFuncs = string.Format("function Notifications::" +
+                "OnTankSpawned::ResetTankHealth(tank, params){{\r\n" +
+                "tank.SetMaxHealth({0});\r\n" +
+                "tank.SetHealth({1});}}\r\n", tbxTank.Text, tbxTank.Text);
             // 重设体力
             TextBox[] tbxHealth = {
                 tbxBoomer, tbxSpitter, tbxHunter, tbxJockey,
@@ -303,10 +304,14 @@ namespace l4d2_mutation_creator
             {
                 if (true == tbx.IsEnabled)
                 {
-                    HookFuncs += string.Format("function Notifications::OnSpa" +
-                        "wn::Reset{0}Health(player, params){{\r\n" +
-                        "if(player.GetPlayerType()==Z_{1})player.SetHealth({2});}}\r\n",
-                        tbx.Tag.ToString(), tbx.Tag.ToString().ToUpper(), tbx.Text);
+                    string SIName = tbx.Tag.ToString();
+                    string Health = tbx.Text;
+                    HookFuncs += string.Format("function Notifications::OnSpawn" +
+                        "::Reset{0}Health(player, params){{\r\n" +
+                        "if(player.GetPlayerType()==Z_{1}){{\r\n" +
+                        "player.SetMaxHealth({2});\r\n" +
+                        "player.SetHealth({3});}}}}\r\n",
+                        SIName, SIName.ToUpper(), Health, Health);
                 }
             }
 
@@ -466,6 +471,44 @@ namespace l4d2_mutation_creator
                 ComboBoxItem item = (ComboBoxItem)sender;
                 GameOption.InitCarries[Convert.ToInt32(item.Uid)] = item.Tag.ToString();
             }
+        }
+
+        private void BtnCheckUpd_Click(object sender, RoutedEventArgs e)
+        {
+            btnCheckUpd.IsEnabled = false;
+
+            string UrlVer = "https://raw.githubusercontent.com/sakamitz/l4d2-mutation-creator/master/VERSION";
+
+            try
+            {
+                System.Net.WebClient wc = new System.Net.WebClient();
+                Byte[] pageData = wc.DownloadData(UrlVer);
+                string ver = System.Text.Encoding.Default.GetString(pageData);
+                
+                if (ver == App.ver)
+                {
+                    lblVersion.Foreground = Brushes.Green;
+                    lblVersion.Content = "已是最新版本";
+                }
+                else
+                {
+                    lblVersion.Foreground = Brushes.Red;
+                    lblVersion.Content = "发现新版本";
+                    MessageBoxResult choice = MessageBox.Show("发现新版本，是否手动下载？", "检查更新",
+                                              MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (MessageBoxResult.Yes == choice)
+                    {
+                        System.Diagnostics.Process.Start("https://github.com/sakamitz/l4d2-mutation-creator/releases");
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("网络连接失败", "检查更新",
+                                MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+
+            btnCheckUpd.IsEnabled = true;
         }
     }
 
