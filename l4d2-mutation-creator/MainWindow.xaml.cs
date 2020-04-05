@@ -87,7 +87,6 @@ namespace l4d2_mutation_creator
             }
         }
 
-        // @TODO: 禁用闲置
         private void GenVPK(string targetDir)
         {
             // ID 不能为空或 VSLib
@@ -99,12 +98,8 @@ namespace l4d2_mutation_creator
             }
 
             // 处理cvar
-            if (true == chkInfAmmo.IsChecked)
-                GameOption.Convars["sv_infinite_primary_ammo"] = "1";
-            if (true == chkReviveFull.IsChecked)
-                GameOption.Convars["survivor_revive_health"] = "100";
-            if (true == chkNoIdle.IsChecked)
-                GameOption.Convars["mp_allowspectators"] = "0";
+            //if (true == chkReviveFull.IsChecked)
+            //    GameOption.Convars["survivor_revive_health"] = "100";
 
             try
             {
@@ -147,12 +142,18 @@ namespace l4d2_mutation_creator
                 DirectorOptions += "cm_FirstManOut = 1\r\n";
             if (true == chkTempHealth.IsChecked)
             {
+                string decay;
+                if (string.IsNullOrEmpty(tbxDecayRate.Text))
+                    decay = "0.27";
+                else
+                    decay = tbxDecayRate.Text;
+
                 DirectorOptions += "cm_TempHealthOnly = 1\r\n";
                 DirectorOptions += ("TempHealthDecayRate = 0.001\r\n" +
                                    "function RecalculateHealthDecay() {\r\n" +
                                    "if (Director.HasAnySurvivorLeftSafeArea())\r\n" +
                                    "TempHealthDecayRate = " +
-                                   tbxDecayRate.Text + "}\r\n");
+                                   decay + "}\r\n");
             }
             if (true == rdbOnePlayer.IsChecked)
             {
@@ -315,6 +316,42 @@ namespace l4d2_mutation_creator
                 }
             }
 
+            // OnReviveSuccess
+            if (false == string.IsNullOrWhiteSpace(tbxIncapHealth.Text))
+            {
+                int health = Convert.ToInt32(tbxIncapHealth.Text);
+                if (health > 30)
+                {
+                    HookFuncs += "function::Notifications::OnReviveSuccess" +
+                                 "::ResetHealth(revivee, reviver, params){" +
+                                 "revivee.IncreaseHealth(" +
+                                 (health-30).ToString() + ");}\r\n";
+                }
+                else if (health < 30)
+                {
+                    HookFuncs += "function::Notifications::OnReviveSuccess" +
+                                 "::ResetHealth(revivee, reviver, params){" +
+                                 "revivee.DecreaseHealth(" +
+                                 (30 - health).ToString() + ");}\r\n";
+                }
+            }
+
+            // OnSurvivorRescued
+            if (true == chkReviveFull.IsChecked)
+            {
+                HookFuncs += "function::Notifications::OnSurvivorRescued" +
+                             "::SetFullHealth(rescuer, victim, params){" +
+                             "victim.SetHealth(100);}\r\n";
+            }
+
+            // 无限备弹
+            if (true == chkInfAmmo.IsChecked)
+            {
+                HookFuncs += "function::Notifications::OnWeaponReload" +
+                             "::ReplenishAmmo(player, ismanual, params){" +
+                             "player.GiveAmmo(100);}\r\n";
+            }
+
             // Update
             if (true == chkTempHealth.IsChecked)
             {
@@ -473,43 +510,6 @@ namespace l4d2_mutation_creator
             }
         }
 
-        private void BtnCheckUpd_Click(object sender, RoutedEventArgs e)
-        {
-            btnCheckUpd.IsEnabled = false;
-
-            string UrlVer = "https://raw.githubusercontent.com/sakamitz/l4d2-mutation-creator/master/VERSION";
-
-            try
-            {
-                System.Net.WebClient wc = new System.Net.WebClient();
-                Byte[] pageData = wc.DownloadData(UrlVer);
-                string ver = System.Text.Encoding.Default.GetString(pageData);
-                
-                if (ver == App.ver)
-                {
-                    lblVersion.Foreground = Brushes.Green;
-                    lblVersion.Content = "已是最新版本";
-                }
-                else
-                {
-                    lblVersion.Foreground = Brushes.Red;
-                    lblVersion.Content = "发现新版本";
-                    MessageBoxResult choice = MessageBox.Show("发现新版本，是否手动下载？", "检查更新",
-                                              MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (MessageBoxResult.Yes == choice)
-                    {
-                        System.Diagnostics.Process.Start("https://github.com/sakamitz/l4d2-mutation-creator/releases");
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("网络连接失败", "检查更新",
-                                MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
-
-            btnCheckUpd.IsEnabled = true;
-        }
     }
 
 }

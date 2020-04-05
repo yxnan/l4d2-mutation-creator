@@ -56,7 +56,6 @@ namespace l4d2_mutation_creator
 
             //显示版本
             wnd.Title = string.Format(wnd.Title, App.ver);
-            wnd.lblVersion.Content = string.Format(wnd.lblVersion.Content.ToString(), App.ver);
             wnd.Show();
         }
 

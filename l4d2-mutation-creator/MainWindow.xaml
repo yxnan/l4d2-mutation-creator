@@ -97,11 +97,10 @@
                         <ComboBoxItem Content="15秒/只" Tag="15"/>
                     </ComboBox>
                     <Grid HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="208" Margin="324,236,0,0">
-                        <Label Content="禁用闲置" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,14,0,0"/>
-                        <RadioButton Content="否" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,31,0,0" IsChecked="True"/>
-                        <RadioButton x:Name="chkNoIdle" Content="是" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95,9,0,0"/>
+                        <Label Content="倒地站起后血量" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,15,0,0"/>
+                        <TextBox x:Name="tbxIncapHealth" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="70" Margin="109,17,0,0"/>
                     </Grid>
-                    <CheckBox x:Name="chkInfTotalSpecial" Content="一直保持这个刷新速率（无休息）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,106,0,0"/>
+                    <CheckBox x:Name="chkInfTotalSpecial" Content="保持这个刷新速率（平均值）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,106,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="武器资源">
@@ -177,18 +176,19 @@
                         <Label Content="SustainPeakTime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,157,0,0"/>
                         <Label Content="RelaxInterval" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,185,0,0"/>
                     </Grid>
-                    <Grid HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="199" Margin="357,46,0,0">
-                        <Label Content="队友伤害*" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-                        <Label Content="难度" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,31,0,0" FontWeight="Bold"/>
-                        <Label Content="因子" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,31,0,0" FontWeight="Bold"/>
-                        <Label Content="简单" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,56,0,0"/>
-                        <TextBox Tag="survivor_friendly_fire_factor_easy" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0" VerticalAlignment="Top" Width="100" Margin="79,58,0,0" TextChanged="TbxCvars_TextChanged"/>
-                        <Label Content="普通" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,87,0,0"/>
-                        <TextBox Tag="survivor_friendly_fire_factor_normal" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.1" VerticalAlignment="Top" Width="100" Margin="79,89,0,0" TextChanged="TbxCvars_TextChanged"/>
-                        <Label Content="高级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,118,0,0"/>
-                        <TextBox Tag="survivor_friendly_fire_factor_hard" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.3" VerticalAlignment="Top" Width="100" Margin="79,120,0,0" TextChanged="TbxCvars_TextChanged"/>
-                        <Label Content="专家" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,149,0,0"/>
-                        <TextBox Tag="survivor_friendly_fire_factor_expert" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.5" VerticalAlignment="Top" Width="100" Margin="79,151,0,0" TextChanged="TbxCvars_TextChanged"/>
+                    <Grid HorizontalAlignment="Left" Height="213" VerticalAlignment="Top" Width="199" Margin="357,23,0,0">
+                        <Label Content="队友伤害" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="60,0,57,0" Width="82"/>
+                        <Label Content="难度" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,54,0,0" FontWeight="Bold"/>
+                        <Label Content="因子" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,54,0,0" FontWeight="Bold"/>
+                        <Label Content="简单" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,79,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_easy" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0" VerticalAlignment="Top" Width="100" Margin="79,81,0,0" TextChanged="TbxCvars_TextChanged"/>
+                        <Label Content="普通" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,110,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_normal" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.1" VerticalAlignment="Top" Width="100" Margin="79,112,0,0" TextChanged="TbxCvars_TextChanged"/>
+                        <Label Content="高级" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,141,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_hard" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.3" VerticalAlignment="Top" Width="100" Margin="79,143,0,0" TextChanged="TbxCvars_TextChanged"/>
+                        <Label Content="专家" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,172,0,0"/>
+                        <TextBox Tag="survivor_friendly_fire_factor_expert" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.5" VerticalAlignment="Top" Width="100" Margin="79,174,0,0" TextChanged="TbxCvars_TextChanged"/>
+                        <Label Content="注：此修改仅在服务器中有效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,24,-31,0" Width="209"/>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="565" Margin="19,228,0,0">
                         <Label Content="初始装备" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16"/>
@@ -222,12 +222,11 @@
                         </ComboBox>
                     </Grid>
                     <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="565" Margin="19,284,0,0">
-                        <CheckBox x:Name="chkInfAmmo" Content="无限备弹*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,12,0,0"/>
-                        <CheckBox x:Name="chkReviveFull" Content="复活后满血*" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="178,12,0,0"/>
+                        <CheckBox x:Name="chkInfAmmo" Content="无限备弹" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,12,0,0"/>
+                        <CheckBox x:Name="chkReviveFull" Content="复活后满血" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="178,12,0,0"/>
                         <Label Content="虚血衰减速度（数值越大则越快）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="286,5,0,0" Width="186"/>
                         <TextBox x:Name="tbxDecayRate" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="RealOnly" HorizontalAlignment="Left" Height="23" Text="0.27" VerticalAlignment="Top" Width="64" Margin="472,7,0,0"/>
                     </Grid>
-                    <Label Content="注：打'*'号的表示仅在服务器中有效" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="375,16,0,0" Width="209"/>
                 </Grid>
             </TabItem>
             <TabItem Header="帮助说明">
@@ -242,12 +241,10 @@
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
-                        <CheckBox Content="优化特感刷新机制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,86,0,0" IsEnabled="False"/>
-                        <CheckBox Content="尸潮节奏控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,64,0,0" IsEnabled="False"/>
-                        <CheckBox Content="武器、资源刷新控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,42,0,0" IsEnabled="False"/>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,13,0,0" Width="201" Height="23"><Run FontWeight="Bold" Text="近几个版本主要"/><Run FontWeight="Bold" Text="更新："/></TextBlock>
-                        <Button x:Name="btnCheckUpd" Content="检查更新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="167,52,0,0" Height="37" Click="BtnCheckUpd_Click"/>
-                        <Label x:Name="lblVersion" Content="当前版本：{0}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,18,0,0" Foreground="Gray"/>
+                        <CheckBox Content="其他一些小功能和改进" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,86,0,0" IsEnabled="False" IsChecked="True"/>
+                        <CheckBox Content="尸潮细节控制" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,64,0,0" IsEnabled="False" IsChecked="True"/>
+                        <CheckBox Content="取消特感上限血量" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,42,0,0" IsEnabled="False" IsChecked="True"/>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,13,0,0" Width="201" Height="23"><Run FontWeight="Bold" Text="近几个版本主要"/><Run FontWeight="Bold" Text="更新："/></TextBlock>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="293,232,0,0" Height="76" Width="259" FontSize="14"><Run Text="✦"/><Run Text=" 本程序"/><Run Text="遵循Unlicense协议，"/><Run Text="完全自由开源，你可以任意"/><Run Text="使用、"/><Run Text="传播、修改、发布本程序的源码和二进制文件，不必"/><Run Text="取得我的授权或"/><Run Text="署"/><Run Text="上我的名字"/></TextBlock>
                 </Grid>
