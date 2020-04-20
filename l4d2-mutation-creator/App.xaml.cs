@@ -13,7 +13,7 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class App : Application
     {
-        public static string ver = "v1.2";
+        public static string ver = "v1.3";
 
         public static WndTempoHelp wndTempoHelp;
         private void Initialize(object sender, StartupEventArgs e)
@@ -300,6 +300,7 @@ namespace l4d2_mutation_creator
         public static void InitGameOption()
         {
             WeaponToRemove = new ArrayList();
+            InitCarries[1] = "pistol";
             Convars = new Dictionary<string, string>();
             InitSI();
             InitTempo();

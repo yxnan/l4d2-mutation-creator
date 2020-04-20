@@ -44,7 +44,7 @@
                 <Grid x:Name="grdSecondTab" Background="#FFE5E5E5">
                     <Grid HorizontalAlignment="Left" Height="275" VerticalAlignment="Top" Width="286" Margin="10,60,0,0">
                         <Label Content="血量修改" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,-4,0,0"/>
-                        <Label Content="刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="201,-4,0,0"/>
+                        <Label Content="每波刷新上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="188,-4,0,0" Width="86"/>
                         <TextBox x:Name="tbxBoomer" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="50" VerticalAlignment="Top" Width="93" Margin="79,26,0,0" TextChanged="TbxHealth_TextChanged" Tag="Boomer" IsEnabled="{Binding IsChecked, ElementName=chkBoomer}"/>
                         <TextBox x:Name="tbxSpitter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="100" VerticalAlignment="Top" Width="93" Margin="79,54,0,0" TextChanged="TbxHealth_TextChanged" Tag="Spitter" IsEnabled="{Binding IsChecked, ElementName=chkSpitter}"/>
                         <TextBox x:Name="tbxHunter" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="250" VerticalAlignment="Top" Width="93" Margin="79,81,0,0" TextChanged="TbxHealth_TextChanged" Tag="Hunter" IsEnabled="{Binding IsChecked, ElementName=chkHunter}"/>
@@ -69,9 +69,10 @@
                         <CheckBox x:Name="chkHunter" Content="Hunter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkSpitter" Content="Spitter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,57,0,0" IsChecked="True"/>
                         <CheckBox x:Name="chkBoomer" Content="Boomer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0" IsChecked="True"/>
-                        <Label Content="注：血量修改可以高于该种特感的上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,244,0,0" FontWeight="Bold"/>
+                        <Label Content="血量修改可以高于该种特感的上限" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,244,0,0" FontWeight="Bold"/>
+                        <Button x:Name="btnReset" Content="&lt;-恢复默认值" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="86" Margin="0,0,10,8" Click="BtnReset_Click" RenderTransformOrigin="0.347,0.638"/>
                     </Grid>
-                    <Grid HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="219" Margin="313,121,0,0">
+                    <Grid HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="219" Margin="316,181,0,0">
                         <Label Content="生还者被控&#xD;&#xA;至体力为零" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,36,0,0"/>
                         <RadioButton x:Name="chkIncapDeath" Content="直接死亡" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,61,0,0"/>
                         <RadioButton x:Name="chkIncapDying" Content="转为黑白" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,37,0,0"/>
@@ -87,20 +88,21 @@
                         <CheckBox x:Name="chkImproveAI" Content="提升bot智商" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,33,0,0"/>
                         <CheckBox x:Name="chkPillConvertion" Content="急救包替换为止痛药" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,33,0,0"/>
                     </Grid>
-                    <Button x:Name="btnReset" Content="&lt;- 恢复默认值" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Margin="0,0,205,17.667" Click="BtnReset_Click"/>
                     <Label Content="感染者刷新间隔" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,72,0,0"/>
                     <ComboBox x:Name="cmbInterval" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="423,74,0,0" SelectedIndex="1">
-                        <ComboBoxItem Content="1秒/只" Tag="1"/>
-                        <ComboBoxItem Content="3秒/只" Tag="3"/>
-                        <ComboBoxItem Content="5秒/只" Tag="5" IsSelected="True"/>
-                        <ComboBoxItem Content="10秒/只" Tag="10"/>
-                        <ComboBoxItem Content="15秒/只" Tag="15"/>
+                        <ComboBoxItem Content="1秒/波" Tag="1"/>
+                        <ComboBoxItem Content="3秒/波" Tag="3"/>
+                        <ComboBoxItem Content="5秒/波" Tag="5" IsSelected="True"/>
+                        <ComboBoxItem Content="10秒/波" Tag="10"/>
+                        <ComboBoxItem Content="15秒/波" Tag="15"/>
                     </ComboBox>
-                    <Grid HorizontalAlignment="Left" Height="58" VerticalAlignment="Top" Width="208" Margin="324,236,0,0">
-                        <Label Content="倒地站起后血量" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,15,0,0"/>
-                        <TextBox x:Name="tbxIncapHealth" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="70" Margin="109,17,0,0"/>
+                    <Grid HorizontalAlignment="Left" Height="77" VerticalAlignment="Top" Width="208" Margin="329,268,0,-0.333">
+                        <Label Content="倒地站起后血量&#xD;&#xA;（小于30无效）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,19,0,0" Height="48"/>
+                        <TextBox x:Name="tbxIncapHealth" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="30" VerticalAlignment="Top" Width="70" Margin="109,31,0,0"/>
                     </Grid>
-                    <CheckBox x:Name="chkInfTotalSpecial" Content="保持这个刷新速率（平均值）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,106,0,0"/>
+                    <CheckBox x:Name="chkInfTotalSpecial" Content="保持这个刷新速率（平均值）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="328,105,0,0"/>
+                    <TextBox x:Name="tbxInitSpecialInterval" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="IntegerOnly" HorizontalAlignment="Left" Height="23" Text="15" VerticalAlignment="Top" Width="62" Margin="446,146,0,0"/>
+                    <Label Content="开局无特感时间：&#xA;防止因动画过长导&#xD;&#xA;致中途刷特感被控" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,128,0,0" Width="117" Height="58"/>
                 </Grid>
             </TabItem>
             <TabItem Header="武器资源">
@@ -199,7 +201,7 @@
                             <ComboBoxItem Content="M60" Tag="rifle_m60" Selected="CmbInitCarries_Selected" Uid="0"/>
                         </ComboBox>
                         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="73" Margin="184,22,0,22">
-                            <ComboBoxItem Content="（无）" Tag="" IsSelected="True" Selected="CmbInitCarries_Selected" Uid="1"/>
+                            <ComboBoxItem Content="（默认）" Tag="pistol" IsSelected="True" Selected="CmbInitCarries_Selected" Uid="1"/>
                             <ComboBoxItem Content="马格南" Tag="pistol_magnum" Selected="CmbInitCarries_Selected" Uid="1"/>
                             <ComboBoxItem Content="消防斧" Tag="fireaxe" Selected="CmbInitCarries_Selected" Uid="1"/>
                             <ComboBoxItem Content="电锯" Tag="chainsaw" Selected="CmbInitCarries_Selected" Uid="1"/>

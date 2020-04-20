@@ -206,8 +206,9 @@ namespace l4d2_mutation_creator
             DirectorOptions += "cm_MaxSpecials = 8\r\n";
             DirectorOptions += string.Format("cm_SpecialRespawnInterval = {0}\r\n",
                                ((ComboBoxItem)cmbInterval.SelectedItem).Tag.ToString());
-            DirectorOptions += "SpecialInitialSpawnDelayMin = 5\r\n";
-            DirectorOptions += "SpecialInitialSpawnDelayMax = 25\r\n";
+            int SIDelay = Convert.ToInt32(tbxInitSpecialInterval.Text);
+            DirectorOptions += "SpecialInitialSpawnDelayMin = " + SIDelay.ToString() + "\r\n";
+            DirectorOptions += "SpecialInitialSpawnDelayMax = " + (SIDelay+3).ToString() + "\r\n";
             DirectorOptions += "ShouldConstrainLargeVolumeSpawn = false\r\n";
             DirectorOptions += "PreferredMobDirection = SPAWN_ANYWHERE\r\n";
             DirectorOptions += "PreferredSpecialDirection = SPAWN_SPECIALS_ANYWHERE\r\n";
@@ -322,14 +323,14 @@ namespace l4d2_mutation_creator
                 int health = Convert.ToInt32(tbxIncapHealth.Text);
                 if (health > 30)
                 {
-                    HookFuncs += "function::Notifications::OnReviveSuccess" +
+                    HookFuncs += "function Notifications::OnReviveSuccess" +
                                  "::ResetHealth(revivee, reviver, params){" +
                                  "revivee.IncreaseHealth(" +
                                  (health-30).ToString() + ");}\r\n";
                 }
                 else if (health < 30)
                 {
-                    HookFuncs += "function::Notifications::OnReviveSuccess" +
+                    HookFuncs += "function Notifications::OnReviveSuccess" +
                                  "::ResetHealth(revivee, reviver, params){" +
                                  "revivee.DecreaseHealth(" +
                                  (30 - health).ToString() + ");}\r\n";
@@ -339,7 +340,7 @@ namespace l4d2_mutation_creator
             // OnSurvivorRescued
             if (true == chkReviveFull.IsChecked)
             {
-                HookFuncs += "function::Notifications::OnSurvivorRescued" +
+                HookFuncs += "function Notifications::OnSurvivorRescued" +
                              "::SetFullHealth(rescuer, victim, params){" +
                              "victim.SetHealth(100);}\r\n";
             }
@@ -347,7 +348,7 @@ namespace l4d2_mutation_creator
             // 无限备弹
             if (true == chkInfAmmo.IsChecked)
             {
-                HookFuncs += "function::Notifications::OnWeaponReload" +
+                HookFuncs += "function Notifications::OnWeaponReload" +
                              "::ReplenishAmmo(player, ismanual, params){" +
                              "player.GiveAmmo(100);}\r\n";
             }
