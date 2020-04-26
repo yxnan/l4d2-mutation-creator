@@ -13,7 +13,7 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class App : Application
     {
-        public static string ver = "v1.3";
+        public static string ver = "v2.0";
 
         public static WndTempoHelp wndTempoHelp;
         private void Initialize(object sender, StartupEventArgs e)
@@ -61,12 +61,6 @@ namespace l4d2_mutation_creator
 
         private bool VerifyIntegrity()
         {
-            // 检查"gamemodes.txt"
-            if (false == File.Exists("template/raw_gamemodes.txt"))
-            {
-                return false;
-            }
-
             // 检查VPK Pack Tool
             string[] BinFiles =
             {

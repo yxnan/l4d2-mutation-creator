@@ -136,10 +136,6 @@ namespace l4d2_mutation_creator
             // 处理 “杂项修改”
             if (true == chkHeadShot.IsChecked)
                 DirectorOptions += "cm_HeadshotOnly = 1\r\n";
-            if (true == chkNoInGameRespawn.IsChecked)
-                DirectorOptions += "cm_AllowSurvivorRescue = 0\r\n";
-            if (true == chkFirstManOut.IsChecked)
-                DirectorOptions += "cm_FirstManOut = 1\r\n";
             if (true == chkTempHealth.IsChecked)
             {
                 string decay;
@@ -160,16 +156,6 @@ namespace l4d2_mutation_creator
                 DirectorOptions += "cm_NoSurvivorBots = 1\r\n";
             }
 
-            if (true == chkImproveAI.IsChecked)
-            {
-                File.Copy("template/raw_gamemodes.txt",
-                    "template/modes/gamemodes.txt", true);
-            }
-            else if (File.Exists("template/modes/gamemodes.txt"))
-            {
-                File.Delete("template/modes/gamemodes.txt");
-            }
-
             // 处理感染者是否可刷新
             CheckBox[] chkSIAvability = {
                 chkBoomer, chkSpitter, chkHunter, chkJockey,
@@ -184,7 +170,14 @@ namespace l4d2_mutation_creator
             }
 
             // 处理刷新上限及频率
-            DirectorOptions += "cm_ProhibitBosses = false\r\n";
+            if (true == chkNoBoss.IsChecked)
+            {
+                DirectorOptions += "cm_ProhibitBosses = true\r\n";
+            }
+            else
+            {
+                DirectorOptions += "cm_ProhibitBosses = false\r\n";
+            }
 
             TextBox[] tbxLimit = {
                 tbxLimitBoomer, tbxLimitSpitter, tbxLimitHunter, tbxLimitJockey,
@@ -203,7 +196,8 @@ namespace l4d2_mutation_creator
             {
                 DirectorOptions += "TotalSpecials = 999\r\n";
             }
-            DirectorOptions += "cm_MaxSpecials = 8\r\n";
+            DirectorOptions += "cm_MaxSpecials = " 
+                               + Convert.ToInt32(tbxMaxSpecials.Text) + "\r\n";
             DirectorOptions += string.Format("cm_SpecialRespawnInterval = {0}\r\n",
                                ((ComboBoxItem)cmbInterval.SelectedItem).Tag.ToString());
             int SIDelay = Convert.ToInt32(tbxInitSpecialInterval.Text);
