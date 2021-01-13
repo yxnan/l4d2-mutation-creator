@@ -233,7 +233,7 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦ 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
-                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/sakamitz/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/typowritter/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
                         <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
                         <Label Content="Github项目地址：" Margin="19,32,165,58"/>
                         <Label Content="UP的b站账号：" Margin="25,65,175,15" RenderTransformOrigin="-0.204,-0.317"/>
