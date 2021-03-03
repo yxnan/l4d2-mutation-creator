@@ -13,7 +13,7 @@ namespace l4d2_mutation_creator
     /// </summary>
     public partial class App : Application
     {
-        public static string ver = "v2.0";
+        public static string ver = "v2.1";
 
         public static WndTempoHelp wndTempoHelp;
         private void Initialize(object sender, StartupEventArgs e)

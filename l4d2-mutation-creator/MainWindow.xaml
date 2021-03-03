@@ -109,15 +109,15 @@
                         <Label Content="武器刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="144,-5,0,0" FontSize="16"/>
                         <CheckBox x:Name="chkChainsaw" Content="电锯" Tag="weapon_chainsaw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkMelee" Content="所有近战" Tag="weapon_melee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,172,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMagnum" Content="Pistol Magnum" Tag="weapon_pistol_magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMagnum" Content="马格南 Magnum" Tag="weapon_pistol_magnum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkPistol" Content="Pistol" Tag="weapon_pistol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,252,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMP5" Content="SMG MP5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,54,0,0"/>
-                        <CheckBox x:Name="chkScout" Content="Sniper Scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,114,0,0"/>
-                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,94,0,0"/>
-                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,74,0,0"/>
-                        <CheckBox x:Name="chkGrenade" Content="Grenade Launcher" Tag="weapon_grenade_launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMP5" Content="SMG MP5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,54,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkScout" Content="Sniper Scout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,114,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkAWP" Content="Sniper AWP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,94,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkSG552" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="274,74,0,0" IsChecked="True"/>
+                        <CheckBox x:Name="chkGrenade" Content="榴弹发射器" Tag="weapon_grenade_launcher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,272,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkM60" Content="Rifle M60" Tag="weapon_rifle_m60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,252,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkSMGS" Content="SMG Silenced" Tag="weapon_smg_silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkSMGS" Content="消音 SMG" Tag="weapon_smg_silenced" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkSMG" Content="SMG" Tag="weapon_smg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,172,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkSG552_" Content="Rifle SG552" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,114,0,0" IsEnabled="False" IsChecked="{Binding IsChecked, ElementName=chkSG552}"/>
                         <CheckBox x:Name="chkDesert" Content="Rifle Desert" Tag="weapon_rifle_desert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,94,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
@@ -125,10 +125,10 @@
                         <CheckBox x:Name="chkM16" Content="Rifle M16" Tag="weapon_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,54,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkSPAS" Content="Shotgun SPAS" Tag="weapon_shotgun_spas" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,114,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <CheckBox x:Name="chkChrome" Content="Shotgun Chrome" Tag="weapon_shotgun_chrome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,94,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkHunting" Content="Hunting Rifle" Tag="weapon_hunting_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkMilitary" Content="Sniper Military" Tag="weapon_sniper_military" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,172,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkPump" Content="Pump Shotgun" Tag="weapon_pumpshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
-                        <CheckBox x:Name="chkAuto" Content="Auto Shotgun" Tag="weapon_autoshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,74,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkHunting" Content="木制猎枪 Hunting" Tag="weapon_hunting_rifle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,192,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkMilitary" Content="军用狙 Military" Tag="weapon_sniper_military" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,172,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkPump" Content="木喷 Pump Shotgun" Tag="weapon_pumpshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
+                        <CheckBox x:Name="chkAuto" Content="铁喷 Auto Shotgun" Tag="weapon_autoshotgun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,74,0,0" Checked="ChkWeapon_Checked" Unchecked="ChkWeapon_Unchecked" IsChecked="True"/>
                         <Label Content="霰弹枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,24,0,0"/>
                         <Label Content="狙击枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,142,0,0"/>
                         <Label Content="自动步枪" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,24,0,0"/>
@@ -233,11 +233,13 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,30,0,0" Height="149" Width="238" FontSize="14"><Run Text="✦ 一个求生之路Mod的开发，往往需要涉及到复杂的编程、建模等知识。为了制作一个小小的功能，你不得不弄明白数门编程语言，又要懂得游戏引擎机制，还要翻阅大量V社的开发文档和社区交流贴，同时一个可靠的团队也必不可少。因此，只有少数玩家能够有时间和精力制作自己的Mod。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="293" Margin="293,7,0,0">
-                        <TextBlock HorizontalAlignment="Left" Margin="128,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/typowritter/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
-                        <TextBlock HorizontalAlignment="Left" Margin="128,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
-                        <Label Content="Github项目地址：" Margin="19,32,165,58"/>
-                        <Label Content="UP的b站账号：" Margin="25,65,175,15" RenderTransformOrigin="-0.204,-0.317"/>
-                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="86" VerticalAlignment="Top" Width="270" Margin="7,17,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="130,23,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="140"><Hyperlink x:Name="hplGithub" Click="HypeLink_OnClick" TargetName="https://github.com/typowritter/l4d2-mutation-creator" ><Run Text="l4d2-mutation-creator"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="130,49,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplBili" Click="HypeLink_OnClick" TargetName="https://space.bilibili.com/374026342/" ><Run Text="bili清唱"/></Hyperlink></TextBlock>
+                        <TextBlock HorizontalAlignment="Left" Margin="130,73,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="20" Width="65"><Hyperlink x:Name="hplSteamGroup" Click="HypeLink_OnClick" TargetName="https://steamcommunity.com/groups/quontrialogue" ><Run Text="久遠三重奏"/></Hyperlink></TextBlock>
+                        <Label Content="Github项目地址：" Margin="18,17,168,73"/>
+                        <Label Content="UP的b站账号：" Margin="18,43,188,49" RenderTransformOrigin="-0.204,-0.317"/>
+                        <Label Content="我们的Steam组：" Margin="18,68,168,12" RenderTransformOrigin="-0.204,-0.317"/>
+                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="109" VerticalAlignment="Top" Width="273" Margin="10,0,0,0"/>
                     </Grid>
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="34,201,0,0" Width="238" FontSize="14"><Run Text="✦ 为了让更多玩家体验到定制游戏的乐趣，UP特意开发了这款小小的程序。这个小工具虽然没法让你做出'保卫小矮人'这样复杂的模式，但也能让你和朋友度过一个快乐的下午，体验一把游戏导演的乐趣。"/></TextBlock>
                     <Grid HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="274" Margin="293,116,0,0">
